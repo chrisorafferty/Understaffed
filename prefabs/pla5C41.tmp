@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2qmok75anf7s"]
+
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_ve2dq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4ww6s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kffgr"]
+
+[sub_resource type="Environment" id="Environment_q1koj"]
+background_mode = 1
+background_color = Color(0.136826, 0.136826, 0.136826, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.60933, 0.60933, 0.60933, 1)
+ssao_enabled = true
+ssao_intensity = 3.52
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("visuals")]
+script = ExtResource("1_ve2dq")
+visuals = NodePath("Visuals")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_4ww6s")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kffgr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.534352, 0.845262, 0, -0.845262, 0.534352, 0, 9.32549, 4.70709)
+environment = SubResource("Environment_q1koj")
