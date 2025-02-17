@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://n4i6ah6fbokx"]
+[gd_scene load_steps=30 format=3 uid="uid://n4i6ah6fbokx"]
 
 [ext_resource type="PackedScene" uid="uid://b2qmok75anf7s" path="res://prefabs/player.tscn" id="1_m4qng"]
 [ext_resource type="PackedScene" uid="uid://dipwxyluvqoyf" path="res://models/robot.blend" id="2_5atfr"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cf24krv6dwl6g" path="res://models/laptop.blend" id="5_w3m0c"]
 [ext_resource type="Script" path="res://scripts/task_giver.gd" id="6_yxxkl"]
 [ext_resource type="Script" path="res://scripts/share_controller.gd" id="9_wejya"]
+[ext_resource type="PackedScene" uid="uid://dvr6s4ewxix22" path="res://prefabs/bug.tscn" id="10_6lfqh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ie1i1"]
 size = Vector3(1, 0.05, 1)
@@ -236,7 +237,6 @@ shape = SubResource("SphereShape3D_iwpc4")
 collision_mask = 2
 
 [node name="desk" parent="Laptop Station" instance=ExtResource("4_xud8i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="laptop" parent="Laptop Station" instance=ExtResource("5_w3m0c")]
 transform = Transform3D(0.997347, 0, 0.0727856, 0, 1, 0, -0.0727856, 0, 0.997347, -0.122553, 1.28156, -0.000209536)
@@ -292,3 +292,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_plb75")
+
+[node name="Bug" parent="." instance=ExtResource("10_6lfqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.63458, -4.76837e-07, -2.70202)
