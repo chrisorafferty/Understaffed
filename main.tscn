@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://n4i6ah6fbokx"]
+[gd_scene load_steps=29 format=3 uid="uid://n4i6ah6fbokx"]
 
 [ext_resource type="PackedScene" uid="uid://b2qmok75anf7s" path="res://prefabs/player.tscn" id="1_m4qng"]
 [ext_resource type="PackedScene" uid="uid://dipwxyluvqoyf" path="res://models/robot.blend" id="2_5atfr"]
@@ -9,16 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cf24krv6dwl6g" path="res://models/laptop.blend" id="5_w3m0c"]
 [ext_resource type="Script" path="res://scripts/task_giver.gd" id="6_yxxkl"]
 [ext_resource type="Script" path="res://scripts/share_controller.gd" id="9_wejya"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c88aw"]
-bg_color = Color(0.164706, 0.164706, 0.164706, 0.796078)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8ota"]
-bg_color = Color(0.491494, 0.664599, 0.274201, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ie1i1"]
 size = Vector3(1, 0.05, 1)
@@ -94,20 +84,6 @@ border_width_bottom = 4
 border_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Panel" type="Panel" parent="."]
-clip_children = 2
-offset_left = 34.0
-offset_top = 24.0
-offset_right = 234.0
-offset_bottom = 44.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_c88aw")
-
-[node name="Panel" type="Panel" parent="Panel"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 20.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_t8ota")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7.051, 3)
@@ -291,17 +267,16 @@ collision_mask = 2
 [node name="Share Graph" type="Control" parent="." node_paths=PackedStringArray("line")]
 clip_contents = true
 layout_mode = 3
-anchor_left = 0.017
-anchor_top = 0.58
-anchor_right = 0.432
-anchor_bottom = 0.977
-grow_vertical = 0
+anchor_left = 0.011
+anchor_top = 0.023
+anchor_right = 0.363
+anchor_bottom = 0.295
 size_flags_vertical = 3
 script = ExtResource("9_wejya")
 line = NodePath("Share Line")
 
 [node name="Share Line" type="Line2D" parent="Share Graph"]
-position = Vector2(19.416, 240.16)
+position = Vector2(10.328, 167.096)
 points = PackedVector2Array(0, 0, 30, -50, 199, -112, 289, -11, 371, -98, 409, -11, 466, -171, 514, 0, 568, -56, 625, -80)
 width = 5.0
 default_color = Color(0.193146, 0.785968, 0, 1)
