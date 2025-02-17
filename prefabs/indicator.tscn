@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgboc2yvldeqr"]
+
+[ext_resource type="PackedScene" uid="uid://dffhtc6d35aeu" path="res://models/indicator.blend" id="1_ibsgp"]
+
+[node name="Indicator" type="Node3D"]
+
+[node name="indicator" parent="." instance=ExtResource("1_ibsgp")]
