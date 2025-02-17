@@ -14,6 +14,7 @@ ssao_enabled = true
 ssao_intensity = 3.52
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("visuals")]
+collision_layer = 2
 script = ExtResource("1_ve2dq")
 visuals = NodePath("Visuals")
 

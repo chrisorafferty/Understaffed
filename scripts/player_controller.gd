@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name PlayerController
 
 const MAX_SPEED: float = 12.0
 const ACCELERATION: float = 3.0
@@ -7,6 +8,18 @@ const DECELERATION: float = 1.0
 const MAX_ROTATION: float = 20.0
 
 @export var visuals: Node3D
+
+func _process(delta: float) -> void:
+	var closestInteractable: Interactable = null
+	if Input.is_action_pressed("interact"):
+		var smallestDist: float = 10000000.0
+		for key in Interactable.interactablesInRange:
+			if Interactable.interactablesInRange[key] < smallestDist:
+				smallestDist = Interactable.interactablesInRange[key]
+				closestInteractable = key
+		
+	Interactable.currentInteraction = closestInteractable
+
 
 func _physics_process(delta: float) -> void:
 

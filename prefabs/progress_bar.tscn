@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://0k3oj2u3r8fo"]
+
+[ext_resource type="Script" path="res://scripts/progress_bar_manager.gd" id="1_w3sx1"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_wefkm"]
+size = Vector2(2, 0.3)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_r28ny"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1eies"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_r28ny")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2qyl"]
+bg_color = Color(0.205117, 0.205117, 0.205117, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmvw7"]
+bg_color = Color(0.40473, 0.688679, 0.1692, 1)
+
+[node name="Viewport" type="MeshInstance3D" node_paths=PackedStringArray("progressPanel")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0100365, 2.94098, -0.0318785)
+mesh = SubResource("QuadMesh_wefkm")
+surface_material_override/0 = SubResource("StandardMaterial3D_1eies")
+script = ExtResource("1_w3sx1")
+progressPanel = NodePath("SubViewport/Panel/Panel")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1024, 153)
+
+[node name="Panel" type="Panel" parent="SubViewport"]
+clip_children = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c2qyl")
+
+[node name="Panel" type="Panel" parent="SubViewport/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tmvw7")

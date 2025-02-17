@@ -1,6 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://n4i6ah6fbokx"]
+[gd_scene load_steps=21 format=3 uid="uid://n4i6ah6fbokx"]
 
 [ext_resource type="PackedScene" uid="uid://b2qmok75anf7s" path="res://prefabs/player.tscn" id="1_m4qng"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="2_qfubc"]
+[ext_resource type="PackedScene" uid="uid://0k3oj2u3r8fo" path="res://prefabs/progress_bar.tscn" id="3_pe183"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c88aw"]
+bg_color = Color(0.164706, 0.164706, 0.164706, 0.796078)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8ota"]
+bg_color = Color(0.491494, 0.664599, 0.274201, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ie1i1"]
 size = Vector3(1, 0.05, 1)
@@ -19,7 +31,58 @@ size = Vector3(20, 4, 0.5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qvqy"]
 albedo_color = Color(0.294809, 0.253166, 0.275761, 1)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_xvolh"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sayeg"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_xvolh")
+
+[sub_resource type="BoxMesh" id="BoxMesh_hxo8m"]
+size = Vector3(2, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tmo7h"]
+size = Vector3(2, 2, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iwpc4"]
+radius = 3.304
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2qyl"]
+bg_color = Color(0.205117, 0.205117, 0.205117, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmvw7"]
+bg_color = Color(0.40473, 0.688679, 0.1692, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_scito"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6j3qh"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_scito")
+
 [node name="Node3D" type="Node3D"]
+
+[node name="Panel" type="Panel" parent="."]
+clip_children = 2
+offset_left = 34.0
+offset_top = 24.0
+offset_right = 234.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c88aw")
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 20.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t8ota")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7.051, 3)
@@ -106,3 +169,68 @@ mesh = SubResource("BoxMesh_i0lpq")
 surface_material_override/0 = SubResource("StandardMaterial3D_1qvqy")
 
 [node name="Player" parent="." instance=ExtResource("1_m4qng")]
+
+[node name="Printer Station" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
+transform = Transform3D(-0.568375, 0, 0.822769, 0, 1, 0, -0.822769, 0, -0.568375, -4.1867, 0, 4.93373)
+script = ExtResource("2_qfubc")
+shapeCast = NodePath("ShapeCast3D")
+progressBarManager = NodePath("Viewport")
+
+[node name="Viewport" parent="Printer Station" instance=ExtResource("3_pe183")]
+surface_material_override/0 = SubResource("StandardMaterial3D_sayeg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Printer Station"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_hxo8m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Printer Station"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_tmo7h")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Printer Station"]
+shape = SubResource("SphereShape3D_iwpc4")
+collision_mask = 2
+
+[node name="SubViewport" type="SubViewport" parent="Printer Station"]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1024, 153)
+
+[node name="Panel" type="Panel" parent="Printer Station/SubViewport"]
+clip_children = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c2qyl")
+
+[node name="Panel" type="Panel" parent="Printer Station/SubViewport/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tmvw7")
+
+[node name="Laptop Station" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
+transform = Transform3D(0.91616, 0, -0.400813, 0, 1, 0, 0.400813, 0, 0.91616, 3.58202, 0, -5.88312)
+script = ExtResource("2_qfubc")
+shapeCast = NodePath("ShapeCast3D")
+progressBarManager = NodePath("Viewport")
+
+[node name="Viewport" parent="Laptop Station" instance=ExtResource("3_pe183")]
+surface_material_override/0 = SubResource("StandardMaterial3D_6j3qh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Laptop Station"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_hxo8m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Laptop Station"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_tmo7h")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Laptop Station"]
+shape = SubResource("SphereShape3D_iwpc4")
+collision_mask = 2
