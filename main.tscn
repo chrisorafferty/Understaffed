@@ -1,15 +1,26 @@
-[gd_scene load_steps=30 format=3 uid="uid://n4i6ah6fbokx"]
+[gd_scene load_steps=36 format=3 uid="uid://n4i6ah6fbokx"]
 
+[ext_resource type="PackedScene" uid="uid://bkjkhiyn0ci2s" path="res://models/plant.blend" id="1_amxgn"]
+[ext_resource type="PackedScene" uid="uid://bf2yy4apcyowt" path="res://models/divider.blend" id="1_hcwnr"]
 [ext_resource type="PackedScene" uid="uid://b2qmok75anf7s" path="res://prefabs/player.tscn" id="1_m4qng"]
+[ext_resource type="Script" path="res://scripts/customer_support.gd" id="2_1xv10"]
 [ext_resource type="PackedScene" uid="uid://dipwxyluvqoyf" path="res://models/robot.blend" id="2_5atfr"]
-[ext_resource type="Script" path="res://scripts/interactable.gd" id="2_qfubc"]
 [ext_resource type="PackedScene" uid="uid://0k3oj2u3r8fo" path="res://prefabs/progress_bar.tscn" id="3_pe183"]
 [ext_resource type="Script" path="res://scripts/task_actioner.gd" id="4_h4nn0"]
+[ext_resource type="PackedScene" uid="uid://dh2s2nwpwyofh" path="res://models/phone.blend" id="4_qmtg3"]
 [ext_resource type="PackedScene" uid="uid://co035ylkcom22" path="res://models/desk.blend" id="4_xud8i"]
 [ext_resource type="PackedScene" uid="uid://cf24krv6dwl6g" path="res://models/laptop.blend" id="5_w3m0c"]
 [ext_resource type="Script" path="res://scripts/task_giver.gd" id="6_yxxkl"]
+[ext_resource type="PackedScene" uid="uid://dw7dblf5tkgs1" path="res://models/bin.blend" id="7_yx7ys"]
 [ext_resource type="Script" path="res://scripts/share_controller.gd" id="9_wejya"]
 [ext_resource type="Script" path="res://scripts/bug_manager.gd" id="11_b1mdi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h1n4a"]
+radius = 0.6
+height = 3.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbkvw"]
+size = Vector3(5.9, 3, 0.13)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ie1i1"]
 size = Vector3(1, 0.05, 1)
@@ -37,14 +48,11 @@ transparency = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_xvolh")
 
-[sub_resource type="BoxMesh" id="BoxMesh_hxo8m"]
-size = Vector3(2, 2, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_tmo7h"]
 size = Vector3(3.55, 2, 1.55)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_iwpc4"]
-radius = 3.304
+[sub_resource type="BoxShape3D" id="BoxShape3D_ywkus"]
+size = Vector3(4, 2, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2qyl"]
 bg_color = Color(0.205117, 0.205117, 0.205117, 1)
@@ -64,6 +72,9 @@ resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_scito")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iwpc4"]
+radius = 3.304
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2lvub"]
 radius = 0.7
@@ -85,6 +96,57 @@ border_width_bottom = 4
 border_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
 
 [node name="Node3D" type="Node3D"]
+
+[node name="Plant" type="StaticBody3D" parent="."]
+transform = Transform3D(0.543951, 0, 0.839117, 0, 1, 0, -0.839117, 0, 0.543951, 2.77225, 5.96046e-07, -0.988514)
+
+[node name="plant" parent="Plant" instance=ExtResource("1_amxgn")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plant"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_h1n4a")
+
+[node name="Plant2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.543951, 0, 0.839117, 0, 1, 0, -0.839117, 0, 0.543951, 7.60827, 5.96046e-07, 7.96065)
+
+[node name="plant" parent="Plant2" instance=ExtResource("1_amxgn")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plant2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_h1n4a")
+
+[node name="bin" parent="." instance=ExtResource("7_yx7ys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78576, -0.0132402, -0.303874)
+
+[node name="bin2" parent="." instance=ExtResource("7_yx7ys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.11003, -0.0132402, -2.60331)
+
+[node name="Divider" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5555, 9.53674e-07, -1.01311)
+
+[node name="divider" parent="Divider" instance=ExtResource("1_hcwnr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Divider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_jbkvw")
+
+[node name="Divider" type="StaticBody3D" parent="Divider"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.01774, 0, -2.9816)
+
+[node name="divider" parent="Divider/Divider" instance=ExtResource("1_hcwnr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Divider/Divider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_jbkvw")
+
+[node name="Divider2" type="StaticBody3D" parent="Divider"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.01774, 0, 2.99225)
+
+[node name="divider" parent="Divider/Divider2" instance=ExtResource("1_hcwnr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Divider/Divider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_jbkvw")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7.051, 3)
@@ -172,34 +234,37 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1qvqy")
 
 [node name="Player" parent="." instance=ExtResource("1_m4qng")]
 
-[node name="Printer Station" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
-transform = Transform3D(-0.568375, 0, 0.822769, 0, 1, 0, -0.822769, 0, -0.568375, -4.1867, 0, 4.93373)
-script = ExtResource("2_qfubc")
+[node name="Customer Support" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75441, 0, 0.151777)
+script = ExtResource("2_1xv10")
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
-shouldWearHeadset = true
 
-[node name="Viewport" parent="Printer Station" instance=ExtResource("3_pe183")]
+[node name="desk" parent="Customer Support" instance=ExtResource("4_xud8i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="phone" parent="Customer Support" instance=ExtResource("4_qmtg3")]
+transform = Transform3D(0.895844, 0, 0.44437, 0, 1, 0, -0.44437, 0, 0.895844, -0.602256, 1.24979, -0.0065853)
+
+[node name="Viewport" parent="Customer Support" instance=ExtResource("3_pe183")]
 surface_material_override/0 = SubResource("StandardMaterial3D_sayeg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Printer Station"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_hxo8m")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Printer Station"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Customer Support"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_tmo7h")
 
-[node name="ShapeCast3D" type="ShapeCast3D" parent="Printer Station"]
-shape = SubResource("SphereShape3D_iwpc4")
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Customer Support"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.37708)
+shape = SubResource("BoxShape3D_ywkus")
+target_position = Vector3(0, 1, 0)
 collision_mask = 2
 
-[node name="SubViewport" type="SubViewport" parent="Printer Station"]
+[node name="SubViewport" type="SubViewport" parent="Customer Support"]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(1024, 153)
 
-[node name="Panel" type="Panel" parent="Printer Station/SubViewport"]
+[node name="Panel" type="Panel" parent="Customer Support/SubViewport"]
 clip_children = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -208,7 +273,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c2qyl")
 
-[node name="Panel" type="Panel" parent="Printer Station/SubViewport/Panel"]
+[node name="Panel" type="Panel" parent="Customer Support/SubViewport/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -234,6 +299,7 @@ transform = Transform3D(0.999999, 0, 1.78814e-07, 0, 1, 0, -1.78814e-07, 0, 0.99
 shape = SubResource("BoxShape3D_tmo7h")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="Laptop Station"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.242788, 0, 0.264111)
 shape = SubResource("SphereShape3D_iwpc4")
 collision_mask = 2
 

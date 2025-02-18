@@ -20,8 +20,9 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_pressed("interact"):
 		Interactable.currentInteraction = closestInteractable
+	else:
+		Interactable.currentInteraction = null
 	
-	print(closestInteractable)
 	if closestInteractable != null:
 		headset.visible = closestInteractable.shouldWearHeadset
 	else:
@@ -37,13 +38,14 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var direction: Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = velocity.x + direction.x * ACCELERATION
 		velocity.z = velocity.z + direction.z * ACCELERATION
-		velocity.x = minf(velocity.x, MAX_SPEED) if velocity.x > 0 else maxf(velocity.x, -MAX_SPEED)
-		velocity.z = minf(velocity.z, MAX_SPEED) if velocity.z > 0 else maxf(velocity.z, -MAX_SPEED)
+		
+	if velocity.length() > MAX_SPEED:
+		velocity = velocity.normalized() * MAX_SPEED
 	
 	var targetForwardDir = velocity if velocity else -visuals.transform.basis.z
 	targetForwardDir.y = 0

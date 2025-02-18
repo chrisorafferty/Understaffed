@@ -5,13 +5,11 @@ class_name Interactable
 @export var shapeCast: ShapeCast3D
 @export var progressBarManager: ProgressBarManager
 @export var interactionTime: float = 0.5
-@export var shouldWearHeadset: bool = false
+var shouldWearHeadset: bool = false
 var indicatorPrefab: PackedScene = preload("res://prefabs/indicator.tscn")
 
 # Local vars
 var curInteractiontime: float = 0.0
-var startedInteraction: bool = false
-var finishedInteraction: bool = false
 var taskCount: int = 0
 var indicators: Array[Node3D] = []
 var INDICATOR_GAP: float = 0.3
@@ -42,25 +40,22 @@ func checkPlayerInRange():
 			interactablesInRange.erase(self)
 
 func handleInteraction(delta: float):
-	if currentInteraction == null:
-		progressBarManager.updateProgress(0)
-	
-	if currentInteraction != self:
-		progressBarManager.set_visible(false)
-		curInteractiontime = 0.0
-		finishedInteraction = false
+	if currentInteraction == null || currentInteraction != self:
+		resetProgress()
 		return
 	
 	curInteractiontime += delta
-	if (!finishedInteraction):
-		progressBarManager.set_visible(true)
-		progressBarManager.updateProgress(clamp(curInteractiontime / interactionTime, 0.0, 1.0))
+	progressBarManager.set_visible(true)
+	progressBarManager.updateProgress(clamp(curInteractiontime / interactionTime, 0.0, 1.0))
 	
-	if !finishedInteraction && curInteractiontime >= interactionTime:
-		finishedInteraction = true
-		progressBarManager.set_visible(false)
+	if curInteractiontime >= interactionTime:
+		resetProgress()
 		interactionComplete()
-		
+
+func resetProgress():
+	progressBarManager.set_visible(false)
+	curInteractiontime = 0.0
+	progressBarManager.updateProgress(0)
 
 func interactionComplete():
 	pass
@@ -87,7 +82,6 @@ func showIndicators():
 	else:
 		for i in range(0, indicators.size()):
 			indicators[i].position.x = ((i / 2) + 0.5) * INDICATOR_GAP * (-1 if i % 2 == 0 else 1)
-
 
 enum TaskType {
 	BUG,
