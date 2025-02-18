@@ -1,15 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvr6s4ewxix22"]
+[gd_scene load_steps=5 format=3 uid="uid://dvr6s4ewxix22"]
 
 [ext_resource type="PackedScene" uid="uid://csxgs1xal2r8b" path="res://models/cockroach.blend" id="1_qoqkw"]
 [ext_resource type="Script" path="res://scripts/bug_controller.gd" id="2_hbhew"]
+[ext_resource type="PackedScene" uid="uid://ds35wqwwpfqj" path="res://models/cockroach_squashed.blend" id="3_51d0n"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xcn7f"]
+radius = 0.3
 
 [node name="Bug" type="Node3D" node_paths=PackedStringArray("shapeCast")]
 script = ExtResource("2_hbhew")
 shapeCast = NodePath("ShapeCast3D")
 
 [node name="cockroach" parent="." instance=ExtResource("1_qoqkw")]
+
+[node name="cockroach_squashed" parent="." instance=ExtResource("3_51d0n")]
+visible = false
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_xcn7f")

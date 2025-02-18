@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cf24krv6dwl6g" path="res://models/laptop.blend" id="5_w3m0c"]
 [ext_resource type="Script" path="res://scripts/task_giver.gd" id="6_yxxkl"]
 [ext_resource type="Script" path="res://scripts/share_controller.gd" id="9_wejya"]
-[ext_resource type="PackedScene" uid="uid://dvr6s4ewxix22" path="res://prefabs/bug.tscn" id="10_6lfqh"]
+[ext_resource type="Script" path="res://scripts/bug_manager.gd" id="11_b1mdi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ie1i1"]
 size = Vector3(1, 0.05, 1)
@@ -177,6 +177,7 @@ transform = Transform3D(-0.568375, 0, 0.822769, 0, 1, 0, -0.822769, 0, -0.568375
 script = ExtResource("2_qfubc")
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
+shouldWearHeadset = true
 
 [node name="Viewport" parent="Printer Station" instance=ExtResource("3_pe183")]
 surface_material_override/0 = SubResource("StandardMaterial3D_sayeg")
@@ -293,5 +294,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_plb75")
 
-[node name="Bug" parent="." instance=ExtResource("10_6lfqh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.63458, -4.76837e-07, -2.70202)
+[node name="BugManager" type="Node3D" parent="."]
+script = ExtResource("11_b1mdi")
+
+[node name="SpawnPoint" type="Node3D" parent="BugManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.43412, -9.53674e-07, -4.03329)
+
+[node name="SpawnPoint2" type="Node3D" parent="BugManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.49736, -1.90735e-06, -9.33744)
+
+[node name="SpawnPoint3" type="Node3D" parent="BugManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.61951, -4.76837e-06, 9.43324)

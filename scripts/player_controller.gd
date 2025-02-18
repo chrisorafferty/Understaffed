@@ -7,18 +7,25 @@ const DECELERATION: float = 1.0
 
 const MAX_ROTATION: float = 20.0
 
-@export var visuals: Node3D
+@onready var headset: Node3D = $Visuals/headset
+@onready var visuals: Node3D = $Visuals
 
 func _process(delta: float) -> void:
 	var closestInteractable: Interactable = null
+	var smallestDist: float = 10000000.0
+	for key in Interactable.interactablesInRange:
+		if Interactable.interactablesInRange[key] < smallestDist:
+			smallestDist = Interactable.interactablesInRange[key]
+			closestInteractable = key
+	
 	if Input.is_action_pressed("interact"):
-		var smallestDist: float = 10000000.0
-		for key in Interactable.interactablesInRange:
-			if Interactable.interactablesInRange[key] < smallestDist:
-				smallestDist = Interactable.interactablesInRange[key]
-				closestInteractable = key
-		
-	Interactable.currentInteraction = closestInteractable
+		Interactable.currentInteraction = closestInteractable
+	
+	print(closestInteractable)
+	if closestInteractable != null:
+		headset.visible = closestInteractable.shouldWearHeadset
+	else:
+		headset.visible = false
 
 
 func _physics_process(delta: float) -> void:

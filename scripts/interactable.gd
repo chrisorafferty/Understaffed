@@ -5,6 +5,7 @@ class_name Interactable
 @export var shapeCast: ShapeCast3D
 @export var progressBarManager: ProgressBarManager
 @export var interactionTime: float = 0.5
+@export var shouldWearHeadset: bool = false
 var indicatorPrefab: PackedScene = preload("res://prefabs/indicator.tscn")
 
 # Local vars
