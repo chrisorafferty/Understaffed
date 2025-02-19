@@ -13,7 +13,7 @@ var curInteractiontime: float = 0.0
 var taskCount: int = 0
 var indicators: Array[Node3D] = []
 var INDICATOR_GAP: float = 0.3
-var INDICATOR_HEIGHT: float = 2.5
+var indicatorMiddle: Vector3 = Vector3(0, 2.5, 0)
 
 # Static vars
 static var interactablesInRange: Dictionary = {}
@@ -68,7 +68,7 @@ func showIndicators():
 		var indicator: Node3D = indicatorPrefab.instantiate()
 		add_child(indicator)
 		indicators.append(indicator)
-		indicator.position = Vector3.UP * INDICATOR_HEIGHT
+		indicator.position = indicatorMiddle
 		
 	if (indicators.size() > 0 && indicators.size() > taskCount):
 		var indicator: Node3D = indicators.pop_back()
@@ -76,12 +76,12 @@ func showIndicators():
 		indicator.queue_free()
 	
 	if indicators.size() % 2 != 0:
-		indicators[0].position.x = 0
+		indicators[0].position.x = indicatorMiddle.x
 		for i in range(1, indicators.size()):
-			indicators[i].position.x = (i + 1) / 2 * INDICATOR_GAP * (-1 if i % 2 == 0 else 1)
+			indicators[i].position.x = indicatorMiddle.x + (i + 1) / 2 * INDICATOR_GAP * (-1 if i % 2 == 0 else 1)
 	else:
 		for i in range(0, indicators.size()):
-			indicators[i].position.x = ((i / 2) + 0.5) * INDICATOR_GAP * (-1 if i % 2 == 0 else 1)
+			indicators[i].position.x = indicatorMiddle.x + ((i / 2) + 0.5) * INDICATOR_GAP * (-1 if i % 2 == 0 else 1)
 
 enum TaskType {
 	BUG,

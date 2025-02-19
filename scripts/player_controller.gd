@@ -2,32 +2,26 @@ extends CharacterBody3D
 class_name PlayerController
 
 const MAX_SPEED: float = 12.0
+const LOW_ENERGY_MAX_SPEED = 7.0
+const SPLAT_SPEED: float = 4.0
 const ACCELERATION: float = 3.0
 const DECELERATION: float = 1.0
 
 const MAX_ROTATION: float = 20.0
+const LOW_ENERGY_ROTATION: float = -15.0
+
+const MAX_ENERGY: float = 40.0
+var energy: float = MAX_ENERGY
+static var scaledEnergy: float = 1
 
 @onready var headset: Node3D = $Visuals/headset
 @onready var visuals: Node3D = $Visuals
 
-func _process(delta: float) -> void:
-	var closestInteractable: Interactable = null
-	var smallestDist: float = 10000000.0
-	for key in Interactable.interactablesInRange:
-		if Interactable.interactablesInRange[key] < smallestDist:
-			smallestDist = Interactable.interactablesInRange[key]
-			closestInteractable = key
-	
-	if Input.is_action_pressed("interact"):
-		Interactable.currentInteraction = closestInteractable
-	else:
-		Interactable.currentInteraction = null
-	
-	if closestInteractable != null:
-		headset.visible = closestInteractable.shouldWearHeadset
-	else:
-		headset.visible = false
+func _ready():
+	Events.drankCoffee.connect(onDrinkCoffee)
 
+func _process(delta: float) -> void:
+	handleInteractions()
 
 func _physics_process(delta: float) -> void:
 
@@ -44,16 +38,47 @@ func _physics_process(delta: float) -> void:
 		velocity.x = velocity.x + direction.x * ACCELERATION
 		velocity.z = velocity.z + direction.z * ACCELERATION
 		
-	if velocity.length() > MAX_SPEED:
-		velocity = velocity.normalized() * MAX_SPEED
+	var maxSpeed = lerpf(LOW_ENERGY_MAX_SPEED, MAX_SPEED, scaledEnergy)
+	var maxRotation = lerpf(LOW_ENERGY_ROTATION, MAX_ROTATION, scaledEnergy)
+	if scaledEnergy < 0.05: 
+		maxRotation = -89
+		maxSpeed = SPLAT_SPEED
+		
+	if velocity.length() > maxSpeed:
+		velocity = velocity.normalized() * maxSpeed
 	
 	var targetForwardDir = velocity if velocity else -visuals.transform.basis.z
 	targetForwardDir.y = 0
 	targetForwardDir = targetForwardDir.normalized()
 	
 	var rightDir = targetForwardDir.cross(Vector3.UP)
-	var targetDir = targetForwardDir.rotated(rightDir, deg_to_rad(clamp(velocity.length() / MAX_SPEED, 0.0, 1.0) * MAX_ROTATION))
+	var targetDir = targetForwardDir.rotated(rightDir, deg_to_rad(clamp(velocity.length() / maxSpeed, 0.0, 1.0) * maxRotation))
+	if maxRotation < 0: targetDir = targetForwardDir.rotated(rightDir, deg_to_rad(maxRotation))
 	var targetBasis = Basis.looking_at(targetDir)
 	visuals.basis = visuals.basis.slerp(targetBasis, 0.5)
 	
+	energy -= delta * velocity.length() / maxSpeed
+	scaledEnergy = Easing.easeOutQuad(clamp(energy / MAX_ENERGY, 0, 1))
+	
 	move_and_slide()
+
+func onDrinkCoffee():
+	energy = MAX_ENERGY
+
+func handleInteractions():
+	var closestInteractable: Interactable = null
+	var smallestDist: float = 10000000.0
+	for key in Interactable.interactablesInRange:
+		if Interactable.interactablesInRange[key] < smallestDist:
+			smallestDist = Interactable.interactablesInRange[key]
+			closestInteractable = key
+	
+	if Input.is_action_pressed("interact"):
+		Interactable.currentInteraction = closestInteractable
+	else:
+		Interactable.currentInteraction = null
+	
+	if closestInteractable != null:
+		headset.visible = closestInteractable.shouldWearHeadset
+	else:
+		headset.visible = false
