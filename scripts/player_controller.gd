@@ -13,6 +13,7 @@ const LOW_ENERGY_ROTATION: float = -15.0
 const MAX_ENERGY: float = 40.0
 var energy: float = MAX_ENERGY
 static var scaledEnergy: float = 1
+static var hasPickedUpFeature: bool = false
 
 @onready var headset: Node3D = $Visuals/headset
 @onready var visuals: Node3D = $Visuals

@@ -18,7 +18,6 @@ var indicatorMiddle: Vector3 = Vector3(0, 2.5, 0)
 # Static vars
 static var interactablesInRange: Dictionary = {}
 static var currentInteraction: Interactable = null
-static var currentTasks: Array[TaskType] = []
 
 func _process(delta: float) -> void:
 	checkPlayerInRange()
@@ -82,8 +81,3 @@ func showIndicators():
 	else:
 		for i in range(0, indicators.size()):
 			indicators[i].position.x = indicatorMiddle.x + ((i / 2) + 0.5) * INDICATOR_GAP * (-1 if i % 2 == 0 else 1)
-
-enum TaskType {
-	BUG,
-	FEATURE
-}
