@@ -9,6 +9,7 @@ static var numComplaints: int = 0
 func _ready() -> void:
 	shouldWearHeadset = true
 	taskTimer = timeBetweenTasks
+	numComplaints = 0
 
 func _process(delta: float) -> void:
 	super._process(delta)

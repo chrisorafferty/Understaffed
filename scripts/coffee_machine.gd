@@ -17,9 +17,8 @@ func _process(delta: float) -> void:
 	coffeeVisuals.scale.y = clamp(brewTimer / brewTime, 0, 1)
 	
 	var coffeeFinishedBrewing = isBrewing && brewTimer >= brewTime
-	var playerLowEnergy = !isBrewing && PlayerController.scaledEnergy < 0.7
 	
-	taskCount = 1 if coffeeFinishedBrewing || playerLowEnergy else 0
+	taskCount = 1 if coffeeFinishedBrewing else 0
 
 func canInteract() -> bool:
 	return !isBrewing || brewTimer >= brewTime

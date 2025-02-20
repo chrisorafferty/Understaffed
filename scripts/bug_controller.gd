@@ -11,14 +11,11 @@ var target: Vector3 = Vector3.ZERO
 @onready var squashedVisuals: Node3D = $cockroach_squashed
 
 var squashed: bool = false
-var bugManager: BugManager
 
-func onSpawn(_bugManager: BugManager, spawnPos: Vector3):
+func _ready():
 	chooseTarget()
 	aliveVisuals.show()
 	squashedVisuals.hide()
-	position = spawnPos
-	bugManager = _bugManager
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,7 +37,7 @@ func _process(delta: float) -> void:
 				squashed = true
 				aliveVisuals.hide()
 				squashedVisuals.show()
-				bugManager.bugKilled.emit(self)
+				Events.bugSquashed.emit(self)
 
 func chooseTarget():
 	target = Vector3(randf_range(-MAX_DIST, MAX_DIST), 0, randf_range(-MAX_DIST, MAX_DIST))

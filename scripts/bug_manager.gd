@@ -8,15 +8,14 @@ var bugPrefab: PackedScene = preload("res://prefabs/bug.tscn")
 
 static var aliveBugs: Array[BugController] = []
 
-signal bugKilled(bug: BugController)
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for child in get_children():
 		spawnPoints.append(child)
 	
 	spawnTimer = timeBetweenSpawns
-	bugKilled.connect(onBugKilled)
+	Events.bugSquashed.connect(onBugKilled)
+	aliveBugs = []
 
 func onBugKilled(bug: BugController):
 	aliveBugs.erase(bug)
@@ -29,5 +28,5 @@ func _process(delta: float) -> void:
 		var bug: BugController = bugPrefab.instantiate()
 		add_child(bug)
 		aliveBugs.append(bug)
-		bug.onSpawn(self, spawnPoints[randi_range(0, spawnPoints.size() - 1)].position)
+		bug.position = spawnPoints[randi_range(0, spawnPoints.size() - 1)].position
 		spawnTimer = timeBetweenSpawns

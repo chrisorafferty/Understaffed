@@ -19,6 +19,10 @@ var indicatorMiddle: Vector3 = Vector3(0, 2.5, 0)
 static var interactablesInRange: Dictionary = {}
 static var currentInteraction: Interactable = null
 
+func _ready() -> void:
+	interactablesInRange = {}
+	currentInteraction = null
+
 func _process(delta: float) -> void:
 	checkPlayerInRange()
 	handleInteraction(delta)

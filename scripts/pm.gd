@@ -7,6 +7,9 @@ var taskTimer: float = 0.0
 
 static var undeliveredFeatures: int = 0
 
+func _ready() -> void:
+	undeliveredFeatures = 0
+
 func _process(delta: float):
 	super._process(delta)
 	

@@ -15,7 +15,7 @@ var timer: float = 0
 var totalTime: float = 0
 var timeSinceLastFeature: float = 0
 var graphPoints: Array[GraphPoint] = []
-static var sharePrice: float = MAX_SHARE_PRICE / 2
+var sharePrice: float = MAX_SHARE_PRICE / 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,6 +25,7 @@ func _ready() -> void:
 	line.add_point(Vector2(size.x, 0.5 * -size.y))
 	graphPoints.append(GraphPoint.new(totalTime - SHARE_UPDATE_TIME, 0.3))
 	graphPoints.append(GraphPoint.new(totalTime, 0.5))
+	Events.featureDeveloped.connect(onFeatureDeveloped)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -53,10 +54,10 @@ func calculateSharePrice():
 	if sharePrice <= 0:
 		Events.gameOver.emit()
 
-static func completedAdvertisement():
+func completedAdvertisement():
 	sharePrice += SHARE_GAIN_PER_ADVERTISEMENT
 
-static func completedFeature():
+func onFeatureDeveloped():
 	sharePrice += SHARE_GAIN_PER_FEATURE
 
 class GraphPoint:

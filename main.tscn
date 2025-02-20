@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://n4i6ah6fbokx"]
+[gd_scene load_steps=60 format=3 uid="uid://n4i6ah6fbokx"]
 
 [ext_resource type="PackedScene" uid="uid://bkjkhiyn0ci2s" path="res://models/plant.blend" id="1_amxgn"]
 [ext_resource type="PackedScene" uid="uid://bf2yy4apcyowt" path="res://models/divider.blend" id="1_hcwnr"]
@@ -18,7 +18,12 @@
 [ext_resource type="Script" path="res://scripts/coffee_machine.gd" id="15_vcdw4"]
 [ext_resource type="PackedScene" uid="uid://jnij1224t508" path="res://models/mug.blend" id="17_krjwx"]
 [ext_resource type="PackedScene" uid="uid://hpt6k6hcu8g7" path="res://models/social_media_setup.blend" id="18_64o0w"]
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="19_8gsr6"]
 [ext_resource type="Script" path="res://scripts/game_over_menu.gd" id="19_27pn2"]
+[ext_resource type="Texture2D" uid="uid://chwg1ggu0d2mw" path="res://art/button.png" id="20_3hppg"]
+[ext_resource type="Texture2D" uid="uid://b50167qbtv5m2" path="res://art/button_pressed.png" id="21_euitm"]
+[ext_resource type="Texture2D" uid="uid://bnkqrleonnpl4" path="res://art/button_hover.png" id="22_lb2d7"]
+[ext_resource type="Texture2D" uid="uid://d02yhuv1tm3od" path="res://art/button_focus.png" id="23_iw3f1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h1n4a"]
 radius = 0.6
@@ -134,6 +139,21 @@ size = Vector3(5.8, 2, 1.9)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6mn3"]
 bg_color = Color(0, 0, 0, 0.203922)
+
+[sub_resource type="SystemFont" id="SystemFont_8qy6r"]
+font_names = PackedStringArray("Trebuchet MS")
+
+[sub_resource type="SystemFont" id="SystemFont_e56ra"]
+font_names = PackedStringArray("Trebuchet MS")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yswt3"]
+bg_color = Color(0.676256, 0.677174, 0.653973, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_73wbc"]
+font_names = PackedStringArray("Trebuchet MS")
+
+[sub_resource type="SystemFont" id="SystemFont_2j8kw"]
+font_names = PackedStringArray("Trebuchet MS")
 
 [node name="Node3D" type="Node3D"]
 
@@ -352,9 +372,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_tmvw7")
 [node name="Social Media Station" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -6.33349, 1.90735e-06, -1.9438)
 script = ExtResource("4_h4nn0")
+interactionTime = 5.0
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
-interactionTime = 5.0
 
 [node name="Viewport" parent="Social Media Station" instance=ExtResource("3_pe183")]
 transform = Transform3D(1, 0, 0, 0, 0.77048, 0.637464, 0, -0.637464, 0.77048, -0.0100365, 2.47801, -0.588192)
@@ -374,9 +394,9 @@ collision_mask = 2
 [node name="Laptop Station" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.5069, 9.53674e-07, -3.65487)
 script = ExtResource("4_h4nn0")
+interactionTime = 4.0
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
-interactionTime = 4.0
 
 [node name="Viewport" parent="Laptop Station" instance=ExtResource("3_pe183")]
 transform = Transform3D(1, 0, 0, 0, 0.77048, 0.637464, 0, -0.637464, 0.77048, -0.0100365, 2.47801, -0.588192)
@@ -497,20 +517,20 @@ collision_mask = 2
 [node name="social_media_setup" parent="." instance=ExtResource("18_64o0w")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.39869, 0, -2.05048)
 
-[node name="GameOverMenu" type="Control" parent="." node_paths=PackedStringArray("playAgainButton", "mainMenuButton", "quitButton", "menuRoot")]
+[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("resumeButton", "mainMenuButton", "quitButton", "menuRoot")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("19_27pn2")
-playAgainButton = NodePath("Background/VBoxContainer/MarginContainer/VBoxContainer/PlayAgainButton")
-mainMenuButton = NodePath("Background/VBoxContainer/MarginContainer/VBoxContainer/MainMenuButton")
-quitButton = NodePath("Background/VBoxContainer/MarginContainer/VBoxContainer/QuitButton")
+script = ExtResource("19_8gsr6")
+resumeButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/ResumeButton")
+mainMenuButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/MainMenuButton2")
+quitButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/QuitButton")
 menuRoot = NodePath("Background")
 
-[node name="Background" type="Panel" parent="GameOverMenu"]
+[node name="Background" type="Panel" parent="PauseMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -519,81 +539,299 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6mn3")
 
-[node name="Game Over Title" type="Label" parent="GameOverMenu/Background"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="PauseMenu/Background"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -43.5
-offset_top = 30.0
-offset_right = 43.5
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 60
-text = "Game Over"
-horizontal_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu/Background"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -245.0
-offset_top = 120.0
+offset_top = -206.0
 offset_right = 245.0
-offset_bottom = 208.0
+offset_bottom = 206.0
 grow_horizontal = 2
+grow_vertical = 2
 
-[node name="TimeText" type="Label" parent="GameOverMenu/Background/VBoxContainer"]
+[node name="Title" type="Label" parent="PauseMenu/Background/VBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "You survived for 100 seconds"
+theme_override_fonts/font = SubResource("SystemFont_8qy6r")
+theme_override_font_sizes/font_size = 60
+text = "Paused"
 horizontal_alignment = 1
 
-[node name="FeatureText" type="Label" parent="GameOverMenu/Background/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Background/VBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "You developed 20 features"
-horizontal_alignment = 1
 
-[node name="BugText" type="Label" parent="GameOverMenu/Background/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "You squashed 10 bugs"
-horizontal_alignment = 1
-
-[node name="CoffeeText" type="Label" parent="GameOverMenu/Background/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "You drank 5 cups of coffee"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="GameOverMenu/Background/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/Background/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu/Background/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="PlayAgainButton" type="Button" parent="GameOverMenu/Background/VBoxContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 80)
+[node name="ResumeButton" type="TextureButton" parent="PauseMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Play again"
+texture_normal = ExtResource("20_3hppg")
+texture_pressed = ExtResource("21_euitm")
+texture_hover = ExtResource("22_lb2d7")
+texture_focused = ExtResource("23_iw3f1")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="MainMenuButton" type="Button" parent="GameOverMenu/Background/VBoxContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 80)
-layout_mode = 2
+[node name="Label" type="Label" parent="PauseMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/ResumeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_e56ra")
 theme_override_font_sizes/font_size = 30
-text = "Main Menu"
+text = "RESUME"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="QuitButton" type="Button" parent="GameOverMenu/Background/VBoxContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 80)
+[node name="MainMenuButton2" type="TextureButton" parent="PauseMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
 layout_mode = 2
+texture_normal = ExtResource("20_3hppg")
+texture_pressed = ExtResource("21_euitm")
+texture_hover = ExtResource("22_lb2d7")
+texture_focused = ExtResource("23_iw3f1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PauseMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/MainMenuButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_e56ra")
 theme_override_font_sizes/font_size = 30
-text = "Quit
-"
+text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="PauseMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+texture_normal = ExtResource("20_3hppg")
+texture_pressed = ExtResource("21_euitm")
+texture_hover = ExtResource("22_lb2d7")
+texture_focused = ExtResource("23_iw3f1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PauseMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_e56ra")
+theme_override_font_sizes/font_size = 30
+text = "QUIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverMenu" type="Control" parent="." node_paths=PackedStringArray("playAgainButton", "mainMenuButton", "quitButton", "menuRoot", "timeText", "featureText", "bugText", "coffeeText")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("19_27pn2")
+playAgainButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/PlayAgainButton")
+mainMenuButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/MainMenuButton2")
+quitButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/QuitButton")
+menuRoot = NodePath("Background")
+timeText = NodePath("Background/Evaluation/MarginContainer/VBoxContainer/TimeText")
+featureText = NodePath("Background/Evaluation/MarginContainer/VBoxContainer/FeatureText")
+bugText = NodePath("Background/Evaluation/MarginContainer/VBoxContainer/BugText")
+coffeeText = NodePath("Background/Evaluation/MarginContainer/VBoxContainer/CoffeeText")
+
+[node name="Background" type="Panel" parent="GameOverMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6mn3")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GameOverMenu/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -206.0
+offset_right = 245.0
+offset_bottom = 206.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game Over Title" type="Label" parent="GameOverMenu/Background/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_8qy6r")
+theme_override_font_sizes/font_size = 60
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu/Background/VBoxContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PlayAgainButton" type="TextureButton" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+texture_normal = ExtResource("20_3hppg")
+texture_pressed = ExtResource("21_euitm")
+texture_hover = ExtResource("22_lb2d7")
+texture_focused = ExtResource("23_iw3f1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/PlayAgainButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_e56ra")
+theme_override_font_sizes/font_size = 30
+text = "PLAY AGAIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuButton2" type="TextureButton" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+texture_normal = ExtResource("20_3hppg")
+texture_pressed = ExtResource("21_euitm")
+texture_hover = ExtResource("22_lb2d7")
+texture_focused = ExtResource("23_iw3f1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/MainMenuButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_e56ra")
+theme_override_font_sizes/font_size = 30
+text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+texture_normal = ExtResource("20_3hppg")
+texture_pressed = ExtResource("21_euitm")
+texture_hover = ExtResource("22_lb2d7")
+texture_focused = ExtResource("23_iw3f1")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_e56ra")
+theme_override_font_sizes/font_size = 30
+text = "QUIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Evaluation" type="Panel" parent="GameOverMenu/Background"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -150.0
+offset_right = -50.0
+offset_bottom = 150.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yswt3")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverMenu/Background/Evaluation"]
+layout_mode = 2
+offset_top = 74.0
+offset_right = 350.0
+offset_bottom = 74.0
+theme_override_constants/margin_left = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu/Background/Evaluation/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameOverMenu/Background/Evaluation/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_73wbc")
+theme_override_font_sizes/font_size = 25
+text = "Employee Evaluation"
+horizontal_alignment = 1
+
+[node name="TimeText" type="Label" parent="GameOverMenu/Background/Evaluation/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_2j8kw")
+theme_override_font_sizes/font_size = 21
+text = "You survived for 100 seconds"
+
+[node name="FeatureText" type="Label" parent="GameOverMenu/Background/Evaluation/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_2j8kw")
+theme_override_font_sizes/font_size = 21
+text = "You developed 20 features"
+
+[node name="BugText" type="Label" parent="GameOverMenu/Background/Evaluation/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_2j8kw")
+theme_override_font_sizes/font_size = 21
+text = "You squashed 10 bugs"
+
+[node name="CoffeeText" type="Label" parent="GameOverMenu/Background/Evaluation/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_2j8kw")
+theme_override_font_sizes/font_size = 21
+text = "You drank 5 cups of coffee"
