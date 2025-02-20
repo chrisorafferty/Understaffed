@@ -3,7 +3,6 @@ class_name PlayerController
 
 const MAX_SPEED: float = 12.0
 const LOW_ENERGY_MAX_SPEED = 7.0
-const SPLAT_SPEED: float = 4.0
 const ACCELERATION: float = 3.0
 const DECELERATION: float = 1.0
 
@@ -18,8 +17,12 @@ static var hasPickedUpFeature: bool = false
 @onready var headset: Node3D = $Visuals/headset
 @onready var visuals: Node3D = $Visuals
 
+var isGameOver: bool = false
+
 func _ready():
 	Events.drankCoffee.connect(onDrinkCoffee)
+	Events.gameOver.connect(onGameOver)
+	Engine.time_scale = 1
 
 func _process(delta: float) -> void:
 	handleInteractions()
@@ -33,17 +36,13 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var input_dir: Vector2 = getInputDir()
 	var direction: Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = velocity.x + direction.x * ACCELERATION
 		velocity.z = velocity.z + direction.z * ACCELERATION
 		
 	var maxSpeed = lerpf(LOW_ENERGY_MAX_SPEED, MAX_SPEED, scaledEnergy)
-	var maxRotation = lerpf(LOW_ENERGY_ROTATION, MAX_ROTATION, scaledEnergy)
-	if scaledEnergy < 0.05: 
-		maxRotation = -89
-		maxSpeed = SPLAT_SPEED
 		
 	if velocity.length() > maxSpeed:
 		velocity = velocity.normalized() * maxSpeed
@@ -53,8 +52,8 @@ func _physics_process(delta: float) -> void:
 	targetForwardDir = targetForwardDir.normalized()
 	
 	var rightDir = targetForwardDir.cross(Vector3.UP)
-	var targetDir = targetForwardDir.rotated(rightDir, deg_to_rad(clamp(velocity.length() / maxSpeed, 0.0, 1.0) * maxRotation))
-	if maxRotation < 0: targetDir = targetForwardDir.rotated(rightDir, deg_to_rad(maxRotation))
+	var targetDir = targetForwardDir.rotated(rightDir, deg_to_rad(getTargetAngle(maxSpeed)))
+	
 	var targetBasis = Basis.looking_at(targetDir)
 	visuals.basis = visuals.basis.slerp(targetBasis, 0.5)
 	
@@ -65,6 +64,27 @@ func _physics_process(delta: float) -> void:
 
 func onDrinkCoffee():
 	energy = MAX_ENERGY
+	
+func onGameOver():
+	isGameOver = true
+	Engine.time_scale = 0.1
+
+func getInputDir() -> Vector2:
+	if isGameOver:
+		return Vector2.ZERO
+	
+	return Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+
+func getTargetAngle(curMaxSped: float) -> float:
+	if isGameOver:
+		return 89
+	
+	var maxRotation = lerpf(LOW_ENERGY_ROTATION, MAX_ROTATION, scaledEnergy)
+	
+	if maxRotation < 0:
+		return maxRotation
+
+	return clamp(velocity.length() / curMaxSped, 0.0, 1.0) * maxRotation
 
 func handleInteractions():
 	var closestInteractable: Interactable = null

@@ -5,7 +5,7 @@ class_name ShareController
 
 const SHARE_UPDATE_TIME: float = 3.0
 const DIST_BETWEEN_GRAPH_POINTS: float = 0.05
-const MAX_SHARE_PRICE: float = 300
+const MAX_SHARE_PRICE: float = 5
 const SHARE_LOSS_PER_BUG: float = 2
 const SHARE_LOSS_PER_COMPLAINT: float = 5
 const SHARE_LOSS_PER_UNDELIVERED_FEATURE: float = 2
@@ -49,6 +49,9 @@ func calculateSharePrice():
 	var complaintLoss: float = CustomerSupport.numComplaints * SHARE_LOSS_PER_COMPLAINT
 	var undeliveredFeaturesLoss: int = PM.undeliveredFeatures * SHARE_LOSS_PER_UNDELIVERED_FEATURE
 	sharePrice -= bugLoss + complaintLoss + undeliveredFeaturesLoss
+	
+	if sharePrice <= 0:
+		Events.gameOver.emit()
 
 static func completedAdvertisement():
 	sharePrice += SHARE_GAIN_PER_ADVERTISEMENT

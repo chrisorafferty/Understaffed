@@ -1,3 +1,4 @@
 extends Node
 
-signal drankCoffee 
+signal drankCoffee
+signal gameOver
