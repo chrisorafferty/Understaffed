@@ -5,7 +5,7 @@ class_name ShareController
 
 const SHARE_UPDATE_TIME: float = 3.0
 const DIST_BETWEEN_GRAPH_POINTS: float = 0.05
-const MAX_SHARE_PRICE: float = 5
+const MIN_MAX_SHARE_PRICE: float = 300
 const SHARE_LOSS_PER_BUG: float = 2
 const SHARE_LOSS_PER_COMPLAINT: float = 5
 const SHARE_LOSS_PER_UNDELIVERED_FEATURE: float = 2
@@ -15,7 +15,7 @@ var timer: float = 0
 var totalTime: float = 0
 var timeSinceLastFeature: float = 0
 var graphPoints: Array[GraphPoint] = []
-var sharePrice: float = MAX_SHARE_PRICE / 2
+var sharePrice: float = MIN_MAX_SHARE_PRICE / 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 	if timer >= SHARE_UPDATE_TIME:
 		calculateSharePrice()
 		timer -= SHARE_UPDATE_TIME
-		var yPos = clamp(sharePrice / MAX_SHARE_PRICE, 0, 1)
+		var yPos = clamp(sharePrice / maxf(MIN_MAX_SHARE_PRICE, sharePrice), 0, 1)
 		line.add_point(Vector2(size.x, yPos * -size.y))
 		graphPoints.append(GraphPoint.new(totalTime, yPos))
 	

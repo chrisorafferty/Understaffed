@@ -17,17 +17,19 @@ static var hasPickedUpFeature: bool = false
 @onready var headset: Node3D = $Visuals/headset
 @onready var visuals: Node3D = $Visuals
 
-var isGameOver: bool = false
+@onready var thoughtBubblePos: Node3D = $Visuals/robot/ThoughtBubblePos
+@onready var thoughtBubble: Node3D = $ThoughtBubble
 
 func _ready():
 	Events.drankCoffee.connect(onDrinkCoffee)
-	Events.gameOver.connect(onGameOver)
 	Events.featureDeveloped.connect(onFeatureDeveloped)
-	Engine.time_scale = 1
 	hasPickedUpFeature = false
+	thoughtBubble.hide()
 
 func _process(delta: float) -> void:
 	handleInteractions()
+	
+	thoughtBubble.global_position = thoughtBubblePos.global_position
 
 func _physics_process(delta: float) -> void:
 
@@ -54,13 +56,19 @@ func _physics_process(delta: float) -> void:
 	targetForwardDir = targetForwardDir.normalized()
 	
 	var rightDir = targetForwardDir.cross(Vector3.UP)
-	var targetDir = targetForwardDir.rotated(rightDir, deg_to_rad(getTargetAngle(maxSpeed)))
+	var targetAngle = getTargetAngle(maxSpeed)
+	var targetDir = targetForwardDir.rotated(rightDir, deg_to_rad(targetAngle))
 	
 	var targetBasis = Basis.looking_at(targetDir)
 	visuals.basis = visuals.basis.slerp(targetBasis, clamp(delta, 0, 1) * 20)
 	
 	energy -= delta * velocity.length() / maxSpeed
 	scaledEnergy = Easing.easeOutQuad(clamp(energy / MAX_ENERGY, 0, 1))
+	
+	if scaledEnergy < 0.7 && !GameManager.isGameOver:
+		thoughtBubble.show()
+	else:
+		thoughtBubble.hide()
 	
 	move_and_slide()
 
@@ -70,18 +78,15 @@ func onDrinkCoffee():
 func onFeatureDeveloped():
 	hasPickedUpFeature = false
 	
-func onGameOver():
-	isGameOver = true
-	Engine.time_scale = 0.1
 
 func getInputDir() -> Vector2:
-	if isGameOver:
+	if !GameManager.isGameRunning:
 		return Vector2.ZERO
 	
 	return Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 
 func getTargetAngle(curMaxSped: float) -> float:
-	if isGameOver:
+	if !GameManager.isGameRunning:
 		return 89
 	
 	var maxRotation = lerpf(LOW_ENERGY_ROTATION, MAX_ROTATION, scaledEnergy)

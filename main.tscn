@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://n4i6ah6fbokx"]
+[gd_scene load_steps=63 format=3 uid="uid://n4i6ah6fbokx"]
 
 [ext_resource type="PackedScene" uid="uid://bkjkhiyn0ci2s" path="res://models/plant.blend" id="1_amxgn"]
 [ext_resource type="PackedScene" uid="uid://bf2yy4apcyowt" path="res://models/divider.blend" id="1_hcwnr"]
@@ -64,8 +64,8 @@ albedo_texture = SubResource("ViewportTexture_xvolh")
 [sub_resource type="BoxShape3D" id="BoxShape3D_tmo7h"]
 size = Vector3(3.55, 2, 1.55)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ywkus"]
-size = Vector3(4, 2, 2)
+[sub_resource type="SphereShape3D" id="SphereShape3D_yqdvi"]
+radius = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2qyl"]
 bg_color = Color(0.205117, 0.205117, 0.205117, 1)
@@ -86,8 +86,8 @@ transparency = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_scito")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_iwpc4"]
-radius = 3.304
+[sub_resource type="BoxShape3D" id="BoxShape3D_2dqoe"]
+size = Vector3(5, 1, 3)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_plus4"]
 viewport_path = NodePath("SubViewport")
@@ -97,6 +97,9 @@ resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_plus4")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ds8ui"]
+size = Vector3(5, 1, 3)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2lvub"]
 radius = 0.7
@@ -111,19 +114,27 @@ transparency = 1
 shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_mjaxh")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_iwpc4"]
+radius = 3.304
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plb75"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 4
 border_width_bottom = 4
 border_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_vyc8s"]
-top_radius = 0.095
-bottom_radius = 0.0
-height = 0.15
+[sub_resource type="CylinderMesh" id="CylinderMesh_o0kho"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1ejn"]
 albedo_color = Color(0.263932, 0.168684, 0.0283209, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vyc8s"]
+top_radius = 0.095
+bottom_radius = 0.01
+height = 0.15
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_uyi7q"]
 viewport_path = NodePath("SubViewport")
@@ -176,13 +187,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_h1n4a")
 
 [node name="bin" parent="." instance=ExtResource("7_yx7ys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78576, -0.0132402, -0.303874)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.51168, -0.0132397, 1.84292)
 
 [node name="bin2" parent="." instance=ExtResource("7_yx7ys")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.11003, -0.0132402, -2.60331)
 
 [node name="Bin" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.47954, 0, -1.72485)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02856, 0, 1.59348)
 
 [node name="bin3" parent="Bin" instance=ExtResource("7_yx7ys")]
 
@@ -191,7 +202,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_w3tky")
 
 [node name="Divider2" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.53776, 9.53674e-07, -3.99471)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.53776, 9.53674e-07, -2.57147)
 
 [node name="divider" parent="Divider2" instance=ExtResource("1_hcwnr")]
 
@@ -200,7 +211,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_jbkvw")
 
 [node name="Divider5" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.44276, 9.53674e-07, -3.99471)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.44276, 9.53674e-07, 3.43999)
 
 [node name="divider" parent="Divider5" instance=ExtResource("1_hcwnr")]
 
@@ -209,7 +220,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_jbkvw")
 
 [node name="Divider3" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.53776, 9.53674e-07, 1.97914)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.53776, 9.53674e-07, 3.40238)
 
 [node name="divider" parent="Divider3" instance=ExtResource("1_hcwnr")]
 
@@ -218,7 +229,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_jbkvw")
 
 [node name="Divider" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5555, 9.53674e-07, -1.01311)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5555, 9.53674e-07, 0.410132)
 
 [node name="divider" parent="Divider" instance=ExtResource("1_hcwnr")]
 
@@ -227,7 +238,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_jbkvw")
 
 [node name="Divider4" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.44487, 9.53674e-07, -1.01311)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.44487, 9.53674e-07, 0.410132)
 
 [node name="divider" parent="Divider4" instance=ExtResource("1_hcwnr")]
 
@@ -322,7 +333,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1qvqy")
 [node name="Player" parent="." instance=ExtResource("1_m4qng")]
 
 [node name="Customer Support" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75441, 0, 0.151777)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.57581, 0, -2.87929)
 script = ExtResource("2_1xv10")
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
@@ -341,8 +352,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_tmo7h")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="Customer Support"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.37708)
-shape = SubResource("BoxShape3D_ywkus")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0592041)
+shape = SubResource("SphereShape3D_yqdvi")
 target_position = Vector3(0, 1, 0)
 collision_mask = 2
 
@@ -370,11 +381,11 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tmvw7")
 
 [node name="Social Media Station" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -6.33349, 1.90735e-06, -1.9438)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.33349, 1.90735e-06, 1.5507)
 script = ExtResource("4_h4nn0")
-interactionTime = 5.0
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
+interactionTime = 5.0
 
 [node name="Viewport" parent="Social Media Station" instance=ExtResource("3_pe183")]
 transform = Transform3D(1, 0, 0, 0, 0.77048, 0.637464, 0, -0.637464, 0.77048, -0.0100365, 2.47801, -0.588192)
@@ -385,18 +396,22 @@ transform = Transform3D(0.999999, 0, 1.78814e-07, 0, 1, 0, -1.78814e-07, 0, 0.99
 shape = SubResource("BoxShape3D_tmo7h")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="Social Media Station"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.242788, 0, 0.264111)
-shape = SubResource("SphereShape3D_iwpc4")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.242788, 0, 1.23945)
+shape = SubResource("BoxShape3D_2dqoe")
+target_position = Vector3(0, 1, 0)
 collision_mask = 2
 
 [node name="desk" parent="Social Media Station" instance=ExtResource("4_xud8i")]
 
+[node name="social_media_setup" parent="Social Media Station" instance=ExtResource("18_64o0w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0652003, -1.90735e-06, -0.10668)
+
 [node name="Laptop Station" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.5069, 9.53674e-07, -3.65487)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.67273, 9.53674e-07, 1.40799)
 script = ExtResource("4_h4nn0")
-interactionTime = 4.0
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
+interactionTime = 4.0
 
 [node name="Viewport" parent="Laptop Station" instance=ExtResource("3_pe183")]
 transform = Transform3D(1, 0, 0, 0, 0.77048, 0.637464, 0, -0.637464, 0.77048, -0.0100365, 2.47801, -0.588192)
@@ -407,8 +422,9 @@ transform = Transform3D(0.999999, 0, 1.78814e-07, 0, 1, 0, -1.78814e-07, 0, 0.99
 shape = SubResource("BoxShape3D_tmo7h")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="Laptop Station"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.242788, 0, 0.264111)
-shape = SubResource("SphereShape3D_iwpc4")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.242788, 0, 1.25542)
+shape = SubResource("BoxShape3D_ds8ui")
+target_position = Vector3(0, 1, 0)
 collision_mask = 2
 
 [node name="desk" parent="Laptop Station" instance=ExtResource("4_xud8i")]
@@ -417,7 +433,7 @@ collision_mask = 2
 transform = Transform3D(0.997347, 0, 0.0727856, 0, 1, 0, -0.0727856, 0, 0.997347, -0.122553, 1.28156, -0.000209536)
 
 [node name="PM" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
-transform = Transform3D(-0.516533, 0, -0.856267, 0, 1, 0, 0.856267, 0, -0.516533, 5.59217, 0, 8.27469)
+transform = Transform3D(0.694206, 0, 0.719776, 0, 1, 0, -0.719776, 0, 0.694206, -8.04233, 0, -4.06752)
 script = ExtResource("6_yxxkl")
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
@@ -480,14 +496,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.49736, -1.90735e-06, -9.33
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.61951, -4.76837e-06, 9.43324)
 
 [node name="Kitchen" type="StaticBody3D" parent="." node_paths=PackedStringArray("shapeCast", "progressBarManager")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.69186, 4.76837e-07, 6.06569)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.09094, -1.7053e-13, -8.6247)
 script = ExtResource("15_vcdw4")
 shapeCast = NodePath("ShapeCast3D")
 progressBarManager = NodePath("Viewport")
 interactionTime = 1.5
 
 [node name="mug" parent="Kitchen" instance=ExtResource("17_krjwx")]
-transform = Transform3D(0.55512, 0, -0.83177, 0, 1, 0, 0.83177, 0, 0.55512, 1.80722, 1.70328, 0.278776)
+transform = Transform3D(0.994852, 0, -0.101334, 0, 1, 0, 0.101334, 0, 0.994852, 1.80722, 1.70328, 0.278776)
+
+[node name="CoffeeStream" type="MeshInstance3D" parent="Kitchen/mug"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22396, 0)
+mesh = SubResource("CylinderMesh_o0kho")
+skeleton = NodePath("../Coffee")
+surface_material_override/0 = SubResource("StandardMaterial3D_d1ejn")
 
 [node name="Coffee" type="Node3D" parent="Kitchen/mug"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0100094, 0)
@@ -499,7 +521,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_d1ejn")
 
 [node name="Viewport" parent="Kitchen" instance=ExtResource("3_pe183")]
-transform = Transform3D(1, 0, 0, 0, 0.77048, 0.637464, 0, -0.637464, 0.77048, -0.0100365, 2.47801, -0.588192)
+transform = Transform3D(1, 0, 0, 0, 0.77048, 0.637464, 0, -0.637464, 0.77048, 1.76351, 2.47801, -0.588192)
 surface_material_override/0 = SubResource("StandardMaterial3D_u7vyp")
 
 [node name="kitchen" parent="Kitchen" instance=ExtResource("15_1h83d")]
@@ -513,9 +535,6 @@ shape = SubResource("BoxShape3D_u7i7l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08252, 0, 0.164729)
 shape = SubResource("SphereShape3D_iwpc4")
 collision_mask = 2
-
-[node name="social_media_setup" parent="." instance=ExtResource("18_64o0w")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.39869, 0, -2.05048)
 
 [node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("resumeButton", "mainMenuButton", "quitButton", "menuRoot")]
 layout_mode = 3
@@ -650,6 +669,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("19_27pn2")
 playAgainButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/PlayAgainButton")
 mainMenuButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/MainMenuButton2")

@@ -22,6 +22,8 @@ func onBugKilled(bug: BugController):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if GameManager.isGameOver: return
+	
 	spawnTimer -= delta
 	
 	if spawnTimer <= 0:

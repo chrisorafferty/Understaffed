@@ -8,6 +8,7 @@ extends Node
 var paused: bool = false
 
 func _ready() -> void:
+	GameManager.onMainSceneLoad()
 	menuRoot.hide()
 	
 	resumeButton.pressed.connect(resume)
@@ -15,6 +16,8 @@ func _ready() -> void:
 	quitButton.pressed.connect(quit)
 
 func _process(delta: float):
+	if GameManager.isGameOver: return
+	
 	if Input.is_action_just_pressed("ui_cancel"):
 		if paused:
 			resume()
@@ -24,13 +27,13 @@ func _process(delta: float):
 func pause():
 	menuRoot.show()
 	resumeButton.grab_focus()
-	Engine.time_scale = 0
 	paused = true
+	Events.gamePaused.emit(true)
 
 func resume():
 	menuRoot.hide()
-	Engine.time_scale = 1
 	paused = false
+	Events.gamePaused.emit(false)
 
 func goToMainMenu():
 	pass

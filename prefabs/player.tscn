@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2qmok75anf7s"]
+[gd_scene load_steps=11 format=3 uid="uid://b2qmok75anf7s"]
 
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_ve2dq"]
 [ext_resource type="PackedScene" uid="uid://cwq703vi1f255" path="res://models/headset.blend" id="2_544wn"]
 [ext_resource type="PackedScene" uid="uid://dipwxyluvqoyf" path="res://models/robot.blend" id="2_y4n25"]
+[ext_resource type="Texture2D" uid="uid://cfsheomc6srch" path="res://art/coffee.png" id="4_5xfod"]
+[ext_resource type="Texture2D" uid="uid://dfp15hhel15hg" path="res://art/thought_bubble.png" id="4_a2mrr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kffgr"]
 
@@ -13,6 +15,20 @@ ambient_light_source = 2
 ambient_light_color = Color(0.60933, 0.60933, 0.60933, 1)
 ssao_enabled = true
 ssao_intensity = 3.52
+
+[sub_resource type="QuadMesh" id="QuadMesh_4gv8n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lay0"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_a2mrr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjd7n"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_5xfod")
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -26,6 +42,9 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 [node name="robot" parent="Visuals" instance=ExtResource("2_y4n25")]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 
+[node name="ThoughtBubblePos" type="Node3D" parent="Visuals/robot"]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 2.1674, 0)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_kffgr")
@@ -33,3 +52,17 @@ shape = SubResource("CapsuleShape3D_kffgr")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.534352, 0.845262, 0, -0.845262, 0.534352, 0, 6.97906, 3.35055)
 environment = SubResource("Environment_q1koj")
+
+[node name="ThoughtBubble" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8792, 0)
+
+[node name="ThoughtBubble" type="MeshInstance3D" parent="ThoughtBubble"]
+transform = Transform3D(1, 0, 0, 0, 0.873033, 0.487662, 0, -0.487662, 0.873033, 0, 0.365375, -0.200423)
+mesh = SubResource("QuadMesh_4gv8n")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7lay0")
+
+[node name="Coffee" type="MeshInstance3D" parent="ThoughtBubble"]
+transform = Transform3D(1, 0, 0, 0, 0.873033, 0.487662, 0, -0.487662, 0.873033, 0, 0.370252, -0.191693)
+mesh = SubResource("QuadMesh_4gv8n")
+surface_material_override/0 = SubResource("StandardMaterial3D_kjd7n")

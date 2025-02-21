@@ -24,6 +24,8 @@ func _ready() -> void:
 	currentInteraction = null
 
 func _process(delta: float) -> void:
+	if !GameManager.isGameRunning: return
+	
 	checkPlayerInRange()
 	handleInteraction(delta)
 	showIndicators()

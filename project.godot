@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Events="*res://scripts/events.gd"
 Easing="*res://scripts/easing.gd"
+GameManager="*res://scripts/game_manager.gd"
 
 [input]
 
