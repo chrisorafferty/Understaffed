@@ -18,10 +18,12 @@ var indicatorMiddle: Vector3 = Vector3(0, 2.5, 0)
 # Static vars
 static var interactablesInRange: Dictionary = {}
 static var currentInteraction: Interactable = null
+static var closestInteractable: Interactable = null
 
 func _ready() -> void:
 	interactablesInRange = {}
 	currentInteraction = null
+	closestInteractable = null
 
 func _process(delta: float) -> void:
 	if !GameManager.isGameRunning: return

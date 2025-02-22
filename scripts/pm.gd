@@ -1,7 +1,7 @@
 extends Interactable
 class_name PM
 
-@export var timeBetweenTasks: float = 10.0
+var timeBetweenTasks: float = 20.0
 
 var taskTimer: float = 0.0
 

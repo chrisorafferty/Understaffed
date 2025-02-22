@@ -97,19 +97,20 @@ func getTargetAngle(curMaxSped: float) -> float:
 	return clamp(velocity.length() / curMaxSped, 0.0, 1.0) * maxRotation
 
 func handleInteractions():
-	var closestInteractable: Interactable = null
+	Interactable.closestInteractable = null
+	
 	var smallestDist: float = 10000000.0
 	for key in Interactable.interactablesInRange:
 		if Interactable.interactablesInRange[key] < smallestDist:
 			smallestDist = Interactable.interactablesInRange[key]
-			closestInteractable = key
+			Interactable.closestInteractable = key
 	
 	if Input.is_action_pressed("interact"):
-		Interactable.currentInteraction = closestInteractable
+		Interactable.currentInteraction = Interactable.closestInteractable
 	else:
 		Interactable.currentInteraction = null
 	
-	if closestInteractable != null:
-		headset.visible = closestInteractable.shouldWearHeadset
+	if Interactable.closestInteractable != null:
+		headset.visible = Interactable.closestInteractable.shouldWearHeadset
 	else:
 		headset.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://n4i6ah6fbokx"]
+[gd_scene load_steps=81 format=3 uid="uid://n4i6ah6fbokx"]
 
 [ext_resource type="PackedScene" uid="uid://bkjkhiyn0ci2s" path="res://models/plant.blend" id="1_amxgn"]
 [ext_resource type="PackedScene" uid="uid://bf2yy4apcyowt" path="res://models/divider.blend" id="1_hcwnr"]
@@ -18,12 +18,17 @@
 [ext_resource type="Script" path="res://scripts/coffee_machine.gd" id="15_vcdw4"]
 [ext_resource type="PackedScene" uid="uid://jnij1224t508" path="res://models/mug.blend" id="17_krjwx"]
 [ext_resource type="PackedScene" uid="uid://hpt6k6hcu8g7" path="res://models/social_media_setup.blend" id="18_64o0w"]
+[ext_resource type="Texture2D" uid="uid://byqvaj05ph7d3" path="res://art/prompt.png" id="19_5y31l"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="19_8gsr6"]
 [ext_resource type="Script" path="res://scripts/game_over_menu.gd" id="19_27pn2"]
 [ext_resource type="Texture2D" uid="uid://chwg1ggu0d2mw" path="res://art/button.png" id="20_3hppg"]
+[ext_resource type="Texture2D" uid="uid://vsjusdk6n74w" path="res://art/power_prompt.png" id="20_a03ok"]
 [ext_resource type="Texture2D" uid="uid://b50167qbtv5m2" path="res://art/button_pressed.png" id="21_euitm"]
 [ext_resource type="Texture2D" uid="uid://bnkqrleonnpl4" path="res://art/button_hover.png" id="22_lb2d7"]
 [ext_resource type="Texture2D" uid="uid://d02yhuv1tm3od" path="res://art/button_focus.png" id="23_iw3f1"]
+[ext_resource type="Texture2D" uid="uid://bwbuf5ivqp6lc" path="res://art/Circular_load_background.png" id="27_rogm7"]
+[ext_resource type="Texture2D" uid="uid://bp5x1mxq1utxa" path="res://art/Circular_load.png" id="28_yt6uo"]
+[ext_resource type="PackedScene" uid="uid://ijwpj11oxxx7" path="res://models/tv.blend" id="29_kgesa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h1n4a"]
 radius = 0.6
@@ -117,11 +122,10 @@ albedo_texture = SubResource("ViewportTexture_mjaxh")
 [sub_resource type="SphereShape3D" id="SphereShape3D_iwpc4"]
 radius = 3.304
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plb75"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 4
-border_width_bottom = 4
-border_color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+[sub_resource type="QuadMesh" id="QuadMesh_hy7me"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1t2d"]
+shading_mode = 0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_o0kho"]
 top_radius = 0.01
@@ -148,6 +152,29 @@ albedo_texture = SubResource("ViewportTexture_uyi7q")
 [sub_resource type="BoxShape3D" id="BoxShape3D_u7i7l"]
 size = Vector3(5.8, 2, 1.9)
 
+[sub_resource type="QuadMesh" id="QuadMesh_xylki"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1tcx"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("19_5y31l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qup78"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("20_a03ok")
+
+[sub_resource type="QuadMesh" id="QuadMesh_52juc"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_s7n4n"]
+viewport_path = NodePath("Kitchen/Prompt/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfup6"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_s7n4n")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6mn3"]
 bg_color = Color(0, 0, 0, 0.203922)
 
@@ -165,6 +192,29 @@ font_names = PackedStringArray("Trebuchet MS")
 
 [sub_resource type="SystemFont" id="SystemFont_2j8kw"]
 font_names = PackedStringArray("Trebuchet MS")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vct01"]
+size = Vector3(5.6, 3, 0.2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7ry6q"]
+size = Vector2(5.4, 2.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_17k4k"]
+viewport_path = NodePath("tv/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rjwf"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_17k4k")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgpmx"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plb75"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -454,34 +504,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ayllg")
 shape = SubResource("SphereShape3D_iwpc4")
 collision_mask = 2
 
-[node name="Share Graph" type="Control" parent="." node_paths=PackedStringArray("line")]
-clip_contents = true
-layout_mode = 3
-anchor_left = 0.011
-anchor_top = 0.023
-anchor_right = 0.363
-anchor_bottom = 0.295
-size_flags_vertical = 3
-script = ExtResource("9_wejya")
-line = NodePath("Share Line")
-
-[node name="Share Line" type="Line2D" parent="Share Graph"]
-position = Vector2(10.328, 167.096)
-points = PackedVector2Array(0, 0, 30, -50, 199, -112, 289, -11, 371, -98, 409, -11, 466, -171, 514, 0, 568, -56, 625, -80)
-width = 5.0
-default_color = Color(0.193146, 0.785968, 0, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Panel" type="Panel" parent="Share Graph"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_plb75")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PM"]
+transform = Transform3D(1, 0, 0, 0, 0.824719, 0.565543, 0, -0.565543, 0.824719, 0, 3.81786, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_hy7me")
+surface_material_override/0 = SubResource("StandardMaterial3D_w1t2d")
 
 [node name="BugManager" type="Node3D" parent="."]
 script = ExtResource("11_b1mdi")
@@ -521,7 +548,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_d1ejn")
 
 [node name="Viewport" parent="Kitchen" instance=ExtResource("3_pe183")]
-transform = Transform3D(1, 0, 0, 0, 0.77048, 0.637464, 0, -0.637464, 0.77048, 1.76351, 2.47801, -0.588192)
+transform = Transform3D(1, 0, 0, 0, 0.77048, 0.637464, 0, -0.637464, 0.77048, 1.76351, 2.47801, -0.046174)
 surface_material_override/0 = SubResource("StandardMaterial3D_u7vyp")
 
 [node name="kitchen" parent="Kitchen" instance=ExtResource("15_1h83d")]
@@ -535,6 +562,47 @@ shape = SubResource("BoxShape3D_u7i7l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08252, 0, 0.164729)
 shape = SubResource("SphereShape3D_iwpc4")
 collision_mask = 2
+
+[node name="Prompt" type="MeshInstance3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 0.490052, 0.871693, 0, -0.871693, 0.490052, 1.82164, 3.1378, -0.485074)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_xylki")
+surface_material_override/0 = SubResource("StandardMaterial3D_h1tcx")
+
+[node name="Power" type="MeshInstance3D" parent="Kitchen/Prompt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00777912, 0.00929046)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_xylki")
+surface_material_override/0 = SubResource("StandardMaterial3D_qup78")
+
+[node name="Progress" type="MeshInstance3D" parent="Kitchen/Prompt"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012125, 0.00681686)
+mesh = SubResource("QuadMesh_52juc")
+surface_material_override/0 = SubResource("StandardMaterial3D_nfup6")
+
+[node name="SubViewport" type="SubViewport" parent="Kitchen/Prompt"]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1600, 1600)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Kitchen/Prompt/SubViewport"]
+texture_repeat = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -750.0
+offset_right = 640.0
+offset_bottom = 530.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_under = ExtResource("27_rogm7")
+texture_progress = ExtResource("28_yt6uo")
+tint_progress = Color(0.423795, 0.713548, 0.852374, 1)
 
 [node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("resumeButton", "mainMenuButton", "quitButton", "menuRoot")]
 layout_mode = 3
@@ -550,6 +618,7 @@ quitButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/V
 menuRoot = NodePath("Background")
 
 [node name="Background" type="Panel" parent="PauseMenu"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -855,3 +924,90 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_2j8kw")
 theme_override_font_sizes/font_size = 21
 text = "You drank 5 cups of coffee"
+
+[node name="tv" parent="." instance=ExtResource("29_kgesa")]
+transform = Transform3D(1, 0, 0, 0, 0.97145, 0.237245, 0, -0.237245, 0.97145, 0.435979, 2.2714, -9.05916)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tv"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tv/StaticBody3D"]
+shape = SubResource("BoxShape3D_vct01")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tv"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0626316)
+mesh = SubResource("QuadMesh_7ry6q")
+surface_material_override/0 = SubResource("StandardMaterial3D_4rjwf")
+
+[node name="SubViewport" type="SubViewport" parent="tv"]
+disable_3d = true
+size = Vector2i(1080, 500)
+
+[node name="Background" type="Panel" parent="tv/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tgpmx")
+
+[node name="Share Graph" type="Control" parent="tv/SubViewport/Background" node_paths=PackedStringArray("line", "alertLine", "lights", "priceText")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("9_wejya")
+line = NodePath("Share Line")
+alertLine = NodePath("alertLine")
+alertLineColour = Color(0.803319, 0, 0.157369, 1)
+alertLightColour = Color(0.727806, 0.453121, 0.46919, 1)
+lights = [NodePath("../../../../OmniLight3D"), NodePath("../../../../OmniLight3D2"), NodePath("../../../../OmniLight3D3"), NodePath("../../../../OmniLight3D4")]
+priceText = NodePath("../SharePrice")
+
+[node name="alertLine" type="Line2D" parent="tv/SubViewport/Background/Share Graph"]
+position = Vector2(10, 167)
+points = PackedVector2Array(0, 0, 400, 0)
+width = 5.0
+default_color = Color(0.803922, 0, 0.156863, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Share Line" type="Line2D" parent="tv/SubViewport/Background/Share Graph"]
+position = Vector2(10.328, 167.096)
+points = PackedVector2Array(0, 0, 30, -50, 199, -112, 289, -11, 371, -98, 409, -11, 466, -171, 514, 0, 568, -56, 625, -80)
+width = 5.0
+default_color = Color(0.193146, 0.785968, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Panel" type="Panel" parent="tv/SubViewport/Background/Share Graph"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_plb75")
+
+[node name="SharePrice" type="Label" parent="tv/SubViewport/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 10.0
+offset_right = -50.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 55
+text = "$200
+"
