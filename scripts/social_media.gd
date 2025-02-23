@@ -1,16 +1,23 @@
 extends Interactable
+class_name SocialMedia
+
+@onready var prompt: Node3D = $Prompt
 
 func _process(delta: float):
-	super._process(delta)
-	
-	taskCount = 1 if PlayerController.hasPickedUpFeature else 0
+	if !isInteracting:
+		prompt.show()
+	else:
+		prompt.hide()
 
 func interactionComplete():
-	Events.featureDeveloped.emit()
+	Events.socialMediaPosted.emit()
 	Sound.stopSound(Sound.SFX.KEYBOARD)
 
 func interactionStarted():
 	Sound.playSoundLoop(Sound.SFX.KEYBOARD)
-	
+
 func interactionCancelled():
 	Sound.stopSound(Sound.SFX.KEYBOARD)
+
+func canInteract():
+	return true

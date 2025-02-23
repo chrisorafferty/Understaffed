@@ -20,6 +20,8 @@ static var interactablesInRange: Dictionary = {}
 static var currentInteraction: Interactable = null
 static var closestInteractable: Interactable = null
 
+var isInteracting: bool = false
+
 func _ready() -> void:
 	interactablesInRange = {}
 	currentInteraction = null
@@ -49,7 +51,16 @@ func checkPlayerInRange():
 func handleInteraction(delta: float):
 	if currentInteraction == null || currentInteraction != self:
 		resetProgress()
+		
+		if isInteracting:
+			isInteracting = false
+			interactionCancelled()
+		
 		return
+	
+	if !isInteracting:
+		isInteracting = true
+		interactionStarted()
 	
 	curInteractiontime += delta
 	progressBarManager.set_visible(true)
@@ -58,11 +69,18 @@ func handleInteraction(delta: float):
 	if curInteractiontime >= interactionTime:
 		resetProgress()
 		interactionComplete()
+		isInteracting = false
 
 func resetProgress():
 	progressBarManager.set_visible(false)
 	curInteractiontime = 0.0
 	progressBarManager.updateProgress(0)
+
+func interactionStarted():
+	pass
+	
+func interactionCancelled():
+	pass
 
 func interactionComplete():
 	pass

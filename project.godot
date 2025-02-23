@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Understaffed"
-run/main_scene="res://main.tscn"
+run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 Events="*res://scripts/events.gd"
 Easing="*res://scripts/easing.gd"
 GameManager="*res://scripts/game_manager.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [input]
 

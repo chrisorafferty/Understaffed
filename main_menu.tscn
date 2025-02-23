@@ -1,0 +1,554 @@
+[gd_scene load_steps=41 format=3 uid="uid://ddyymvlbqpe34"]
+
+[ext_resource type="PackedScene" uid="uid://bkjkhiyn0ci2s" path="res://models/plant.blend" id="1_mwsl0"]
+[ext_resource type="PackedScene" uid="uid://dw7dblf5tkgs1" path="res://models/bin.blend" id="2_phiwh"]
+[ext_resource type="PackedScene" uid="uid://bf2yy4apcyowt" path="res://models/divider.blend" id="3_xc5aj"]
+[ext_resource type="PackedScene" uid="uid://co035ylkcom22" path="res://models/desk.blend" id="6_4q08b"]
+[ext_resource type="PackedScene" uid="uid://dh2s2nwpwyofh" path="res://models/phone.blend" id="7_bac6u"]
+[ext_resource type="PackedScene" uid="uid://hpt6k6hcu8g7" path="res://models/social_media_setup.blend" id="11_0s3kk"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="11_cw6v1"]
+[ext_resource type="PackedScene" uid="uid://cf24krv6dwl6g" path="res://models/laptop.blend" id="13_2bdf1"]
+[ext_resource type="PackedScene" uid="uid://dipwxyluvqoyf" path="res://models/robot.blend" id="15_wnf8j"]
+[ext_resource type="PackedScene" uid="uid://csxgs1xal2r8b" path="res://models/cockroach.blend" id="18_o3ceu"]
+[ext_resource type="PackedScene" uid="uid://jnij1224t508" path="res://models/mug.blend" id="19_ji0al"]
+[ext_resource type="PackedScene" uid="uid://dgre4todxw4ix" path="res://models/kitchen.blend" id="20_mjk6v"]
+[ext_resource type="Texture2D" uid="uid://chwg1ggu0d2mw" path="res://art/button.png" id="25_cfav8"]
+[ext_resource type="Texture2D" uid="uid://b50167qbtv5m2" path="res://art/button_pressed.png" id="26_hytxy"]
+[ext_resource type="Texture2D" uid="uid://bnkqrleonnpl4" path="res://art/button_hover.png" id="27_8p6jn"]
+[ext_resource type="Texture2D" uid="uid://d02yhuv1tm3od" path="res://art/button_focus.png" id="28_fwx12"]
+[ext_resource type="PackedScene" uid="uid://ijwpj11oxxx7" path="res://models/tv.blend" id="30_2khjo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h1n4a"]
+radius = 0.6
+height = 3.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w3tky"]
+radius = 0.4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbkvw"]
+size = Vector3(5.9, 3, 0.13)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ie1i1"]
+size = Vector3(1, 0.05, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b308h"]
+albedo_color = Color(0.271481, 0.281055, 0.370435, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2u35e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cg37j"]
+size = Vector3(20, 6, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i0lpq"]
+size = Vector3(20, 6, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qvqy"]
+albedo_color = Color(0.294809, 0.253166, 0.275761, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tmo7h"]
+size = Vector3(3.55, 2, 1.55)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2lvub"]
+radius = 0.7
+height = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o0kho"]
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1ejn"]
+albedo_color = Color(0.263932, 0.168684, 0.0283209, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vyc8s"]
+top_radius = 0.095
+bottom_radius = 0.01
+height = 0.15
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u7i7l"]
+size = Vector3(5.8, 2, 1.9)
+
+[sub_resource type="SystemFont" id="SystemFont_8qy6r"]
+font_names = PackedStringArray("Trebuchet MS")
+
+[sub_resource type="SystemFont" id="SystemFont_e56ra"]
+font_names = PackedStringArray("Trebuchet MS")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vct01"]
+size = Vector3(5.6, 3, 0.2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7ry6q"]
+size = Vector2(5.4, 2.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_17k4k"]
+viewport_path = NodePath("tv/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rjwf"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_17k4k")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgpmx"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plb75"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Plant" type="StaticBody3D" parent="."]
+transform = Transform3D(0.543951, 0, 0.839117, 0, 1, 0, -0.839117, 0, 0.543951, 2.77225, 5.96046e-07, -0.988514)
+
+[node name="plant" parent="Plant" instance=ExtResource("1_mwsl0")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plant"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_h1n4a")
+
+[node name="Plant2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.543951, 0, 0.839117, 0, 1, 0, -0.839117, 0, 0.543951, 7.60827, 5.96046e-07, 7.96065)
+
+[node name="plant" parent="Plant2" instance=ExtResource("1_mwsl0")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plant2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_h1n4a")
+
+[node name="bin" parent="." instance=ExtResource("2_phiwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.51168, -0.0132397, 1.84292)
+
+[node name="bin2" parent="." instance=ExtResource("2_phiwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.11003, -0.0132402, -2.60331)
+
+[node name="Bin" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02856, 0, 1.59348)
+
+[node name="bin3" parent="Bin" instance=ExtResource("2_phiwh")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_w3tky")
+
+[node name="Divider2" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.53776, 9.53674e-07, -2.57147)
+
+[node name="divider" parent="Divider2" instance=ExtResource("3_xc5aj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Divider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_jbkvw")
+
+[node name="Divider5" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.44276, 9.53674e-07, 3.43999)
+
+[node name="divider" parent="Divider5" instance=ExtResource("3_xc5aj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Divider5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_jbkvw")
+
+[node name="Divider3" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.53776, 9.53674e-07, 3.40238)
+
+[node name="divider" parent="Divider3" instance=ExtResource("3_xc5aj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Divider3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_jbkvw")
+
+[node name="Divider" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5555, 9.53674e-07, 0.410132)
+
+[node name="divider" parent="Divider" instance=ExtResource("3_xc5aj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Divider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_jbkvw")
+
+[node name="Divider4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.44487, 9.53674e-07, 0.410132)
+
+[node name="divider" parent="Divider4" instance=ExtResource("3_xc5aj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Divider4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_jbkvw")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7.051, 3)
+light_energy = 0.219
+omni_range = 22.201
+omni_attenuation = -0.212
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.929931, 0.367735, 0, -0.367735, 0.929931, 1.74639, 4.63556, 2.81333)
+light_energy = 0.219
+omni_range = 22.201
+omni_attenuation = -0.212
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 7.051, -3)
+light_energy = 0.219
+omni_range = 22.201
+omni_attenuation = -0.212
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7.051, -3)
+light_energy = 0.219
+omni_range = 22.201
+omni_attenuation = -0.212
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_ie1i1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_b308h")
+mesh = SubResource("PlaneMesh_2u35e")
+skeleton = NodePath("../..")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.75)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_cg37j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_i0lpq")
+surface_material_override/0 = SubResource("StandardMaterial3D_1qvqy")
+
+[node name="Wall2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.75)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_cg37j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_i0lpq")
+surface_material_override/0 = SubResource("StandardMaterial3D_1qvqy")
+
+[node name="Wall3" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.75, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_cg37j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_i0lpq")
+surface_material_override/0 = SubResource("StandardMaterial3D_1qvqy")
+
+[node name="Wall4" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.75, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_cg37j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_i0lpq")
+surface_material_override/0 = SubResource("StandardMaterial3D_1qvqy")
+
+[node name="Customer Support" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.57581, 0, -2.87929)
+
+[node name="desk" parent="Customer Support" instance=ExtResource("6_4q08b")]
+
+[node name="phone" parent="Customer Support" instance=ExtResource("7_bac6u")]
+transform = Transform3D(0.895844, 0, 0.44437, 0, 1, 0, -0.44437, 0, 0.895844, -0.602256, 1.24979, -0.0065853)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Customer Support"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_tmo7h")
+
+[node name="Social Media Station" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.33349, 1.90735e-06, 1.5507)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Social Media Station"]
+transform = Transform3D(0.999999, 0, 1.78814e-07, 0, 1, 0, -1.78814e-07, 0, 0.999999, 0, 1, 0)
+shape = SubResource("BoxShape3D_tmo7h")
+
+[node name="desk" parent="Social Media Station" instance=ExtResource("6_4q08b")]
+
+[node name="social_media_setup" parent="Social Media Station" instance=ExtResource("11_0s3kk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0652003, -1.90735e-06, -0.10668)
+
+[node name="Laptop Station" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.67273, 9.53674e-07, 1.40799)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Laptop Station"]
+transform = Transform3D(0.999999, 0, 1.78814e-07, 0, 1, 0, -1.78814e-07, 0, 0.999999, 0, 1, 0)
+shape = SubResource("BoxShape3D_tmo7h")
+
+[node name="desk" parent="Laptop Station" instance=ExtResource("6_4q08b")]
+
+[node name="laptop" parent="Laptop Station" instance=ExtResource("13_2bdf1")]
+transform = Transform3D(0.997347, 0, 0.0727856, 0, 1, 0, -0.0727856, 0, 0.997347, -0.122553, 1.28156, -0.000209536)
+
+[node name="PM" type="StaticBody3D" parent="."]
+transform = Transform3D(0.694206, 0, 0.719776, 0, 1, 0, -0.719776, 0, 0.694206, -8.04233, 0, -4.06752)
+
+[node name="robot" parent="PM" instance=ExtResource("15_wnf8j")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PM"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_2lvub")
+
+[node name="Kitchen" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.09094, -1.7053e-13, -8.6247)
+
+[node name="mug" parent="Kitchen" instance=ExtResource("19_ji0al")]
+transform = Transform3D(0.994852, 0, -0.101334, 0, 1, 0, 0.101334, 0, 0.994852, 1.80722, 1.70328, 0.278776)
+
+[node name="CoffeeStream" type="MeshInstance3D" parent="Kitchen/mug"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22396, 0)
+mesh = SubResource("CylinderMesh_o0kho")
+skeleton = NodePath("../Coffee")
+surface_material_override/0 = SubResource("StandardMaterial3D_d1ejn")
+
+[node name="Coffee" type="Node3D" parent="Kitchen/mug"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0100094, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Kitchen/mug/Coffee"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108864, 0)
+mesh = SubResource("CylinderMesh_vyc8s")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_d1ejn")
+
+[node name="kitchen" parent="Kitchen" instance=ExtResource("20_mjk6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.391564, 0, 0.11092)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kitchen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1, 0)
+shape = SubResource("BoxShape3D_u7i7l")
+
+[node name="MainrMenu" type="Control" parent="." node_paths=PackedStringArray("playButton", "quitButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_cw6v1")
+playButton = NodePath("VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/PlayButton")
+quitButton = NodePath("VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/QuitButton")
+
+[node name="Label2" type="Label" parent="MainrMenu"]
+offset_left = 719.0
+offset_top = 414.0
+offset_right = 1132.0
+offset_bottom = 666.0
+theme_override_font_sizes/font_size = 20
+text = "Controls
+  - Move: WASD or Left analogue stick
+  - Interact: E/Space or A on Xbox controller
+  - Pause: Esc or Start on Xbox controller"
+
+[node name="Label" type="Label" parent="MainrMenu"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 417.0
+offset_right = 445.0
+offset_bottom = 669.0
+theme_override_font_sizes/font_size = 20
+text = "Instructions:
+  - Get tasks from your product manager
+  - Implement the tasks at your laptop
+  - Squish bugs!
+  - Answer customer complaints
+  - Advertise on social media"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainrMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -206.0
+offset_right = 245.0
+offset_bottom = 206.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Game Over Title" type="Label" parent="MainrMenu/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_8qy6r")
+theme_override_font_sizes/font_size = 60
+text = "Understaffed"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainrMenu/VBoxContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainrMenu/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainrMenu/VBoxContainer2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PlayButton" type="TextureButton" parent="MainrMenu/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+texture_normal = ExtResource("25_cfav8")
+texture_pressed = ExtResource("26_hytxy")
+texture_hover = ExtResource("27_8p6jn")
+texture_focused = ExtResource("28_fwx12")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainrMenu/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_e56ra")
+theme_override_font_sizes/font_size = 30
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="MainrMenu/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+texture_normal = ExtResource("25_cfav8")
+texture_pressed = ExtResource("26_hytxy")
+texture_hover = ExtResource("27_8p6jn")
+texture_focused = ExtResource("28_fwx12")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainrMenu/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_e56ra")
+theme_override_font_sizes/font_size = 30
+text = "QUIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tv" parent="." instance=ExtResource("30_2khjo")]
+transform = Transform3D(1, 0, 0, 0, 0.97145, 0.237245, 0, -0.237245, 0.97145, 0.435979, 2.2714, -9.05916)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="tv"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tv/StaticBody3D"]
+shape = SubResource("BoxShape3D_vct01")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tv"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0626316)
+mesh = SubResource("QuadMesh_7ry6q")
+surface_material_override/0 = SubResource("StandardMaterial3D_4rjwf")
+
+[node name="SubViewport" type="SubViewport" parent="tv"]
+disable_3d = true
+size = Vector2i(1080, 500)
+
+[node name="Background" type="Panel" parent="tv/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tgpmx")
+
+[node name="Share Graph" type="Control" parent="tv/SubViewport/Background"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="alertLine" type="Line2D" parent="tv/SubViewport/Background/Share Graph"]
+position = Vector2(10, 167)
+points = PackedVector2Array(0, 0, 400, 0)
+width = 5.0
+default_color = Color(0.803922, 0, 0.156863, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Share Line" type="Line2D" parent="tv/SubViewport/Background/Share Graph"]
+position = Vector2(10.328, 167.096)
+points = PackedVector2Array(0, 0, 30, -50, 199, -112, 289, -11, 371, -98, 409, -11, 466, -171, 514, 0, 568, -56, 625, -80)
+width = 5.0
+default_color = Color(0.193146, 0.785968, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Panel" type="Panel" parent="tv/SubViewport/Background/Share Graph"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_plb75")
+
+[node name="SharePrice" type="Label" parent="tv/SubViewport/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 10.0
+offset_right = -50.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 55
+text = "$200
+"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.670297, 0.742093, 0, -0.742093, 0.670297, 0, 3.66652, 3.03209)
+
+[node name="robot" parent="." instance=ExtResource("15_wnf8j")]
+transform = Transform3D(0.827352, 0.217354, 0.517925, -0.359504, 0.913394, 0.190965, -0.431563, -0.344192, 0.833838, -2.25655, 0.14373, 0.536407)
+
+[node name="cockroach" parent="." instance=ExtResource("18_o3ceu")]
+transform = Transform3D(0.733671, 0, 0.679505, 0, 1, 0, -0.679505, 0, 0.733671, 1.70974, 1.19209e-07, 1.72306)
+
+[node name="cockroach2" parent="." instance=ExtResource("18_o3ceu")]
+transform = Transform3D(0.829564, 0, -0.558411, 0, 1, 0, 0.558411, 0, 0.829564, -2.08197, 4.17233e-07, 3.28754)
+
+[node name="cockroach3" parent="." instance=ExtResource("18_o3ceu")]
+transform = Transform3D(0.932273, 0, -0.361755, 0, 1, 0, 0.361755, 0, 0.932273, -4.28933, 1.19209e-07, -4.15854)

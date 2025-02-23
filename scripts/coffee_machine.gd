@@ -13,6 +13,8 @@ var isBrewing: bool = false
 @onready var brewProgressPrompt: Node3D = $Prompt/Progress
 @onready var brewProgressBar: TextureProgressBar = $Prompt/SubViewport/TextureProgressBar
 
+var hadCoffeeFinishedBrewing: bool = false
+
 func _ready():
 	indicatorMiddle = Vector3(1.9, 2.5, 0)
 	prompt.hide()
@@ -25,6 +27,9 @@ func _process(delta: float) -> void:
 	super._process(delta)
 	
 	var coffeeFinishedBrewing = isBrewing && brewTimer >= brewTime
+	
+	if coffeeFinishedBrewing && !hadCoffeeFinishedBrewing:
+		Sound.stopSound(Sound.SFX.COFFEE)
 
 	if isBrewing && !coffeeFinishedBrewing:
 		brewTimer += delta
@@ -51,6 +56,8 @@ func _process(delta: float) -> void:
 		powerPrompt.hide()
 		brewProgressPrompt.hide()
 		
+	hadCoffeeFinishedBrewing = coffeeFinishedBrewing
+		
 func canInteract() -> bool:
 	return !isBrewing || brewTimer >= brewTime
 	
@@ -62,3 +69,4 @@ func interactionComplete():
 	elif !isBrewing:
 		isBrewing = true
 		brewTimer = 0
+		Sound.playSound(Sound.SFX.COFFEE)

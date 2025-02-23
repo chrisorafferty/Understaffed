@@ -43,6 +43,7 @@ func _ready() -> void:
 	graphPoints.append(GraphPoint.new(totalTime, 0.5))
 	
 	Events.featureDeveloped.connect(onFeatureDeveloped)
+	Events.socialMediaPosted.connect(onSocialMediaPosted)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -85,7 +86,7 @@ func calculateSharePrice():
 	if sharePrice <= 0:
 		Events.gameOver.emit()
 
-func completedAdvertisement():
+func onSocialMediaPosted():
 	sharePrice += SHARE_GAIN_PER_ADVERTISEMENT
 
 func onFeatureDeveloped():

@@ -96,8 +96,12 @@ func getTargetAngle(curMaxSped: float) -> float:
 
 	return clamp(velocity.length() / curMaxSped, 0.0, 1.0) * maxRotation
 
-func handleInteractions():
+func handleInteractions():	
 	Interactable.closestInteractable = null
+	
+	if !GameManager.isGameRunning:
+		Interactable.currentInteraction = null
+		return
 	
 	var smallestDist: float = 10000000.0
 	for key in Interactable.interactablesInRange:

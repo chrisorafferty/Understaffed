@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 				aliveVisuals.hide()
 				squashedVisuals.show()
 				Events.bugSquashed.emit(self)
+				Sound.playSound(Sound.SFX.BUG_SQUISH)
 
 func chooseTarget():
 	target = Vector3(randf_range(-MAX_DIST, MAX_DIST), 0, randf_range(-MAX_DIST, MAX_DIST))
