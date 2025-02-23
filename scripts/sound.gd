@@ -66,9 +66,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	for audioPlayer in audioPlayers:
 		if !GameManager.isGameRunning:
-			audioPlayer.stream_paused = true
+			audioPlayers[audioPlayer].stream_paused = true
 		else:
-			audioPlayer.stream_paused = false
+			audioPlayers[audioPlayer].stream_paused = false
 	
 	for sfx in curLoopingSounds:
 		var player: AudioStreamPlayer = audioPlayers[sfx]

@@ -497,7 +497,7 @@ mesh = SubResource("QuadMesh_t2a5p")
 surface_material_override/0 = SubResource("StandardMaterial3D_krb72")
 
 [node name="Label3D" type="Label3D" parent="Social Media Station/Prompt"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0713769, 0.00977148)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0713769, 0.0462483)
 modulate = Color(0, 0, 0, 1)
 text = "$$$"
 font_size = 60
@@ -671,6 +671,7 @@ quitButton = NodePath("Background/VBoxContainer2/VBoxContainer/MarginContainer/V
 menuRoot = NodePath("Background")
 
 [node name="Background" type="Panel" parent="PauseMenu"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -803,7 +804,6 @@ bugText = NodePath("Background/Evaluation/MarginContainer/VBoxContainer/BugText"
 coffeeText = NodePath("Background/Evaluation/MarginContainer/VBoxContainer/CoffeeText")
 
 [node name="Background" type="Panel" parent="GameOverMenu"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -894,6 +894,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="QuitButton" type="TextureButton" parent="GameOverMenu/Background/VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 2
 texture_normal = ExtResource("20_3hppg")
@@ -1070,30 +1071,30 @@ script = ExtResource("30_5c4qy")
 
 [node name="BugRunAudio" type="AudioStreamPlayer" parent="SoundController"]
 volume_db = -10.306
-script = ExtResource("30_5c4qy")
+playback_type = 2
 
 [node name="BugSquishAudio" type="AudioStreamPlayer" parent="SoundController"]
 stream = SubResource("AudioStreamWAV_ph34v")
-script = ExtResource("30_5c4qy")
+playback_type = 2
 
 [node name="CsYapAudio" type="AudioStreamPlayer" parent="SoundController"]
 stream = SubResource("AudioStreamWAV_ph34v")
-script = ExtResource("30_5c4qy")
+playback_type = 2
 
 [node name="PmYapAudio" type="AudioStreamPlayer" parent="SoundController"]
 stream = SubResource("AudioStreamWAV_ph34v")
 volume_db = 6.559
-script = ExtResource("30_5c4qy")
+playback_type = 2
 
 [node name="MovementAudio" type="AudioStreamPlayer" parent="SoundController"]
 stream = SubResource("AudioStreamWAV_ph34v")
-script = ExtResource("30_5c4qy")
+playback_type = 2
 
 [node name="CoffeeAudio" type="AudioStreamPlayer" parent="SoundController"]
 stream = SubResource("AudioStreamWAV_ph34v")
-script = ExtResource("30_5c4qy")
+playback_type = 2
 
 [node name="KeyboardAudio" type="AudioStreamPlayer" parent="SoundController"]
 stream = SubResource("AudioStreamWAV_ph34v")
 volume_db = -10.307
-script = ExtResource("30_5c4qy")
+playback_type = 2

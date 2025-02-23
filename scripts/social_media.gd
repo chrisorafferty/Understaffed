@@ -3,7 +3,14 @@ class_name SocialMedia
 
 @onready var prompt: Node3D = $Prompt
 
+func _ready() -> void:
+	super._ready()
+	
+	prompt.hide()
+
 func _process(delta: float):
+	super._process(delta)
+
 	if !isInteracting:
 		prompt.show()
 	else:

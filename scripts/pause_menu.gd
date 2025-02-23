@@ -36,7 +36,7 @@ func resume():
 	Events.gamePaused.emit(false)
 
 func goToMainMenu():
-	pass
+	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func quit():
 	get_tree().quit()

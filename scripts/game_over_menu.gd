@@ -52,7 +52,7 @@ func restartScene():
 	get_tree().reload_current_scene()
 
 func goToMainMenu():
-	pass
+	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func quit():
 	get_tree().quit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ddyymvlbqpe34"]
+[gd_scene load_steps=42 format=3 uid="uid://ddyymvlbqpe34"]
 
 [ext_resource type="PackedScene" uid="uid://bkjkhiyn0ci2s" path="res://models/plant.blend" id="1_mwsl0"]
 [ext_resource type="PackedScene" uid="uid://dw7dblf5tkgs1" path="res://models/bin.blend" id="2_phiwh"]
@@ -67,6 +67,13 @@ height = 0.15
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u7i7l"]
 size = Vector3(5.8, 2, 1.9)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avvj8"]
+bg_color = Color(0, 0, 0, 0.345098)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [sub_resource type="SystemFont" id="SystemFont_8qy6r"]
 font_names = PackedStringArray("Trebuchet MS")
@@ -351,7 +358,31 @@ script = ExtResource("11_cw6v1")
 playButton = NodePath("VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/PlayButton")
 quitButton = NodePath("VBoxContainer2/VBoxContainer/MarginContainer/VBoxContainer/QuitButton")
 
+[node name="Panel2" type="Panel" parent="MainrMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -492.0
+offset_top = -259.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_avvj8")
+
+[node name="Panel" type="Panel" parent="MainrMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -259.0
+offset_right = 492.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_avvj8")
+
 [node name="Label2" type="Label" parent="MainrMenu"]
+layout_mode = 0
 offset_left = 719.0
 offset_top = 414.0
 offset_right = 1132.0
